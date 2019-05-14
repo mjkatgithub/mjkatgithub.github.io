@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: mjkatgithub.github.io
+Token: 266a67c2878b9257fc9965ca2c11e6e3ab759dc476005210ebc6b5331dc55f2d
