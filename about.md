@@ -4,7 +4,11 @@ title: About
 permalink: /about/
 weight: 1
 ---
-# Über dieses Blog
-Hallo, mein Name ist Melchior. Auf dieser Seite findest du links zu meinen Projekten und aktuelle (Konzert)termine. Ansonsten Poste ich alles mögliche.
+# About this blog
+Hello, my name is Melchior. In the past I posted various things on this blog, but decided to focus more on technical post. However, this does not mean that there is not something else to read here. I have also decided to write my posts in English in the future. Have fun reading my posts. They may also be useful for one or the other, even if I am now primarily writing them for myself in order to deepen topics.
+
 # Sozial Media
 soon (tm)
+
+# donate
+Well, at the moment there is not really a way to donate but if you want to support me give the awesome brave-browser a chance. [https://brave.com/mjk716](https://brave.com/mjk716)
