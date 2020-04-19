@@ -1,9 +1,0 @@
-/**
- * Sozial Media Links
- */
-.social {
-  display: inline-block;
-  li {
-  list-style-type: none;
-  }
-}
