@@ -34,7 +34,7 @@ $ cd myAwesomeLibraryName && npm start
 And in another tab, run the create-react-app dev server:
 $ cd myAwesomeLibraryName/example && npm start
 ```
-This is fucking awesome!!! we already have an existing component which is even used in an create-react-app example.
+This is awesome!!! We already have an existing component which is even used in an create-react-app example.
 
 #### directory structure
 Now let's have a quick look on the generated files.
@@ -47,14 +47,29 @@ Now let's have a quick look on the generated files.
 │   ├── index.modern.js
 │   └── index.modern.js.map
 ├── example
-│   ├── begin-with-the-crazy-ideas.md
-│   └── on-simplicity-in-technology.md
+│   ├── node_modules
+│   |   ├── ...
+|   │   └── ...
+│   ├── public
+│   |   ├── favicon.ico
+│   |   ├── index.html
+|   │   └── manifest.json
+│   ├── src
+│   |   ├── App.js
+│   |   ├── App.test.js
+│   |   ├── index.css
+|   │   └── index.js
+│   ├── package.json
+│   ├── package-lock.json
+│   └── README.md
 ├── node_modules
 │   ├── ...
 │   └── ...
 ├── src
-│   ├── default.html
-│   └── post.html
+│   ├── .eslintrc
+│   ├── index.js
+│   ├── index.test.js
+│   └── styles.module.css
 ├── .editorconfig
 ├── .eslintignore
 ├── .eslintrc
@@ -74,21 +89,41 @@ In this directory lives the sample app that uses our component.
 this is the Directory where npm stores the dependencies of our component
 #### src
 This is where the fun happened. Here we code our component library which will be built later in dist.
-#### the root folder
-- .editorconfig
-- .eslintignore
-- .eslintrc
-- .gitignore
-- .prettierrc
-- .travis.yml
-- package.json
-- package-lock.json
 
-## keep it simple
-soon tm
+### keep it simple
+I have many ideas of features I could implement in to this library but I think in the end this is realy timeconsuming and I shoud keep it simple. At leased for now. The goal is to just refresh my react skills, lern how to create and shere a npm package and then move on to the next project.
 
+Sure, I want to rebuild this jekyll Navbar/header thing width the burger icon/button as an reactjs-component but for now let's keep it simple and add this stuff later on. 
+
+So I add a simple horizontal Navbar. 
+
+### link
+We have this example `create-react-app` app in the example directory where we can check out our new component. But if we would like to us it in an other project, before we publish it to npm, we have to link it, so we can use it there.
+
+insight myAwesomeLibraryName
+```bash
+npm link
+```
+```bash
+npm unlink
+```
+insight another project
+```bash
+npm link myAwesomeLibraryName
+```
 ## distribute to npm
-soon tm
-
-## calculate the width
-soon tm
+first create npm account and werifi email
+then
+```bash
+npm adduser
+```
+## next steps
+this are just some notes to complete this post lateron
+- use prop-types
+```bash
+npm install --save prop-types
+```
+- use link
+- use sass
+- add the burger icon/button stuff 
+- calculate the width of the lins to prevent uggly design issues
