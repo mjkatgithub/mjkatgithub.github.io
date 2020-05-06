@@ -10,6 +10,7 @@ Hello, my name is Melchior. In the past I posted various things on this blog, bu
 # Sozial Media
 [![github](/assets/icons/github48.png)](https://github.com/mjkatgithub)
 [![facebook](/assets/icons/facebook48.png)](https://www.facebook.com/melcorethefirst/)
+[![twitter](/assets/icons/twitter48.png)](https://twitter.com/M_Kannengiesser)
 
 # donate
 Well, at the moment there is not really a way to donate but if you want to support me give the awesome brave-browser a chance. [https://brave.com/mjk716](https://brave.com/mjk716)
