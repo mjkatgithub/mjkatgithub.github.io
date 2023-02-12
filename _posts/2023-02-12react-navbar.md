@@ -1,10 +1,10 @@
 ---
 layout: post
 title: react-navbar
-date: '2020-05-01 20:00:00 +0200'
+date: '2023-02-12'
 categories:
 - Allgemein
-tags: []
+tags: [coding, react]
 comments: []
 excerpt_separator: <!--more-->
 ---
