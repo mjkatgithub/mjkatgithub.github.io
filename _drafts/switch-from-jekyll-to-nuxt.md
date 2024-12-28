@@ -12,4 +12,14 @@ I haven't use ruby for a while but more and more js/ts (especially vue) so i dec
 
 Also, in Nuxt, using NuxtContent, like in jekyll, I can save my content as mardown, which is then converted to html.
 <!--more-->
-so the journey begins
+## so the journey begins
+
+initializing a new nuxt project is very easy.
+
+just run
+
+```console
+npx nuxi@latest init <project-name>
+```
+
+Then you will be asked on the console to select a package manager (I use npm) and you will be asked whether you want to initialize a git repo right away. That's it.
