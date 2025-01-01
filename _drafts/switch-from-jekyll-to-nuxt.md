@@ -608,4 +608,45 @@ In order to render the posts, however, a "catchAllRoute" is required, i.e. a fil
 </template>
 ```
 
+## Tailwind
+
+the next step was to install the tailwind module
+
+```console
+npm install --save-dev @nuxtjs/tailwindcss
+```
+
+and add it to the nuxtConfig
+
+```ts
+export default defineNuxtConfig({
+  ...
+  modules: [
+    '@nuxt/content',
+    '@nuxtjs/tailwindcss'
+  ]
+  ...
+})
+```
+
+In order for the markdown to be rendered correctly, tailwindcss-typography was required.
+
+I istalled it by
+
+```console
+npm install -D @tailwindcss/typography
+```
+
+to enable it i added a `tailwind.config.ts` to the root directory and added the typography-plugin.
+
+```ts
+module.exports = {
+  plugins: [
+    require('@tailwindcss/typography')
+  ]
+}
+```
+
+and in the catchAllRoute for the blog-posts I added the `prose` class to `article` and added a `max-width: 992px!important;` to override the one from the `prose` class of tailwind-typography for now.
+
 **to be continued ...**
