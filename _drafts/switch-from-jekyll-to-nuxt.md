@@ -574,4 +574,38 @@ body {
 </style>
 ```
 
+## Nuxt-Content
+
+Nuxt Content is a Nuxt module that enables us to render our Markdown posts from the Jekyll project.
+
+First of all, we need to install the module
+
+```console
+npm install --save-dev @nuxt/content
+```
+
+and add it to the Modules array in nuxt.config.ts in the root directory
+
+```ts
+export default defineNuxtConfig({
+  ...
+  modules: ['@nuxt/content']
+  ...
+})
+```
+
+We then create a directory called `content` in the root directory of our project and a directory called `blog` within it. All files from the `_posts` directory of the Jekyll project will now go into this directory.
+
+In order to render the posts, however, a "catchAllRoute" is required, i.e. a file with the name `[...slug].vue` in the Pages directory (more precisely in the blog subdirectory) which only contains the template with `<ContentDoc />` which loads and renders the content of the Markdown files.
+
+- [...slug].vue
+
+```vue
+<template>
+  <article>
+    <ContentDoc />
+  </article>
+</template>
+```
+
 **to be continued ...**
