@@ -649,4 +649,22 @@ module.exports = {
 
 and in the catchAllRoute for the blog-posts I added the `prose` class to `article` and added a `max-width: 992px!important;` to override the one from the `prose` class of tailwind-typography for now.
 
+## Copy and adjust content
+
+Finally, I was able to copy the remaining Markdown files from the Jekyll project into the content directory. Some of the Markdown files still contained HTML, so I quickly converted them into pure Markdown.
+
+In order to be able to render everything, I then had to create the corresponding Vue files in the pages directory and read in and render the Markdown files with `<ContentDoc>`. I'm just using `about.vue` as an example here, since the other files basically look exactly the same.
+
+- about.vue
+
+```vue
+<template>
+  <article class="prose">
+    <ContentDoc path="/about" />
+  </article>
+</template>
+```
+
+I then copied the directory `icons` from the directory `_assets` in the Jekyll project to `public/assets/` in the Nuxt project so that the social media icons are also displayed.
+
 **to be continued ...**
