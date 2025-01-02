@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Switch from Jekyll to Nuxt
-date: '2023-02-12'
+date: '2024-12-28'
 categories:
-- Allgemein
+- General
 tags: [coding, vue, nuxt]
 comments: []
 excerpt_separator: <!--more-->
