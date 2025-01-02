@@ -780,4 +780,8 @@ With this data I was finally able to render the content.
 </template>
 ```
 
+## cleanup
+
+I originally started the blog with wordpress and many of the old blog posts were basically just one-liners with a couple of links. Some of the posts I didn't even convert to Markdown but just took the HTML from wordpress. I think I used some tool to export everything from wordpress so I could integrate it into my new jekyll site. Anyway. I deleted most of the old blog posts. If you still want to see them there is always the [Wayback Machine](http://web.archive.org/) ;-).
+
 **to be continued ...**
