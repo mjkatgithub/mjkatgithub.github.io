@@ -7,6 +7,7 @@ categories:
 tags: [coding, vue, nuxt]
 comments: []
 excerpt_separator: <!--more-->
+draft: true
 ---
 I haven't use ruby for a while but more and more js/ts (especially vue) so i decided to switch from jekyll to nuxt, as I also like the benefits of autoloading components and server-side rendering with Nuxt.
 
@@ -52,7 +53,7 @@ I created the pages folder and saved some files with dummy content there. It sho
 ```vue
 <template>
   <div>
-    links
+    datenschutzerklaerung
   </div>
 </template>
 ```
@@ -62,7 +63,7 @@ I created the pages folder and saved some files with dummy content there. It sho
 ```vue
 <template>
   <div>
-    links
+    impressum
   </div>
 </template>
 ```
@@ -72,7 +73,7 @@ I created the pages folder and saved some files with dummy content there. It sho
 ```vue
 <template>
   <div>
-    links
+    home
   </div>
 </template>
 ```
@@ -666,5 +667,116 @@ In order to be able to render everything, I then had to create the corresponding
 ```
 
 I then copied the directory `icons` from the directory `_assets` in the Jekyll project to `public/assets/` in the Nuxt project so that the social media icons are also displayed.
+
+## Query and Render Blog-Posts
+
+On the homepage, which until now was just a dummy with the template
+
+```vue
+<template>
+  <div>
+    home
+  </div>
+</template>
+```
+
+, I wanted to list the blog posts. However, only those that are not drafts.
+
+In Jekyll, the drafts were recognized because they were in the `_drafts` directory, which as far as I know doesn't exist in Nuxt, but since all the Markdown files have a front matter section anyway and there are usually only one or two drafts anyway, I can specify that there with `draft: true`.
+
+In order not to exclude the designs during development, I first had to check whether the code was executed in a development environment.
+
+```js
+const isDev = process.env.NODE_ENV === 'development'
+```
+
+With this information I could then query the contents of the blog posts.
+
+```js
+const { data } = await useAsyncData(
+  'blog-list',
+   () => {
+     const query = queryContent('/blog')
+       .only(['_path', 'title', 'date', 'excerpt', 'tags', 'categories'])
+       .sort({ date: -1 })
+     if (!isDev) {
+       query.where({ draft: { $ne: true } })
+     }
+     return query.find()
+   }
+)
+```
+
+Since only the title as a link to the full article, the introduction as well as tags and categories should be displayed on the homepage, I used computed properties to extract the relevant data from the posts.
+
+```js
+const posts = computed(() => {
+  if (!data.value) {
+    return []
+  }
+  return data.value.map(post => {
+    const preview = {
+      ...post,
+      date: formatDate(post.date),
+      paragraphs: extractParagraphs(post.excerpt)
+    }
+    return preview
+  })
+})
+
+function formatDate(dateString) {
+  const date = new Date(dateString)
+  return new Intl.DateTimeFormat('en-US', { month: 'short', day: '2-digit', year: 'numeric' }).format(date)
+}
+
+function extractParagraphs(excerpt) {
+  const paragraphs = [];
+  function extractText(node) {
+    if (!node) return;
+    if (node.type === 'element' && node.tag === 'p') {
+      const paragraphText = node.children
+        .filter(child => child.type === 'text')
+        .map(child => child.value)
+        .join('');
+      paragraphs.push(paragraphText);
+    } else if (Array.isArray(node.children)) {
+      node.children.forEach(child => extractText(child));
+    }
+  }
+  extractText(excerpt);
+  return paragraphs;
+}
+```
+
+With this data I was finally able to render the content.
+
+```vue
+<template>
+  <section>
+    <article class="prose" style="margin-bottom: 1rem;">
+      <h1>Blog Posts</h1>
+      <p>This are my recent blog posts</p>
+    </article>
+    <article v-for="post in posts" :key="post._path" class="prose" style="margin-bottom: 1rem;">
+      <header>
+        <div>{{ post.date }}</div>
+        <h2><nuxt-link :to="post._path">{{ post.title }}</nuxt-link></h2>
+      </header>
+      <main v-if="'paragraphs' in post">
+        <p v-for="paragraph in post.paragraphs" :key="paragraph">
+          {{ paragraph }}
+        </p>
+      </main>
+      <footer>
+        <span><b>Categories: </b></span>
+        <span v-for="category in post.categories" :key="category">{{ category }}, </span>
+        <span><b>Tags: </b></span>
+        <span v-for="tag in post.tags" :key="tag">{{ tag }}, </span><br />
+        <nuxt-link :to="post._path">read more</nuxt-link>
+      </footer>
+    </article>
+  </section>
+</template>
+```
 
 **to be continued ...**
