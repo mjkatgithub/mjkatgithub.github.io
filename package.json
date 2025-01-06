@@ -8,7 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist -t --nojekyll",
+    "info": "gh-pages --help"
   },
   "dependencies": {
     "gh-pages": "^6.3.0",
