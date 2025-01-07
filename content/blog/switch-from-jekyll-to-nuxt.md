@@ -784,4 +784,69 @@ With this data I was finally able to render the content.
 
 I originally started the blog with wordpress and many of the old blog posts were basically just one-liners with a couple of links. Some of the posts I didn't even convert to Markdown but just took the HTML from wordpress. I think I used some tool to export everything from wordpress so I could integrate it into my new jekyll site. Anyway. I deleted most of the old blog posts. If you still want to see them there is always the [Wayback Machine](http://web.archive.org/) ;-).
 
+## replace jekyll blog
+
+### deploment
+
+I published the Jekyll blog on GitHub pages. Of course, I wanted to do the same with the Nuxt blog. The only thing that was supposed to change was the underlying technology from Jekyll to Nuxt.
+
+github-pages is intended for static websites. which means that no server code runs there. The Nuxt project must therefore generate static HTML. In the Nuxt documentation I have a section on GitHub-Pages which says right at the beginning:
+
+> GitHub Pages only support static sites, Nuxt will pre-render your application to static HTML files.
+
+which I have just described
+
+and
+
+> If you are not using a custom domain, you need to set NUXT_APP_BASE_URL to your repository-slug for your build step.Example: https://<user>.github.io/<repository>/: NUXT_APP_BASE_URL=/<repository>/ npx nuxt build --preset github_pages
+
+followed by an example GitHub Actions workflow.
+
+So I adjusted my nuxt.config.ts and configured the base URL, since I had created a new repo for the nuxt project and created a `deploy.yml` in `.github/workflows/`:
+
+```yml
+# https://github.com/actions/deploy-pages#usage
+name: Deploy to GitHub Pages
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      # Pick your own package manager and build script
+      - run: npm install
+      - run: npx nuxt build --preset github_pages
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./.output/public
+  # Deployment job
+  deploy:
+    # Add a dependency to the build job
+    needs: build
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    # Deploy to the github_pages environment
+    environment:
+      name: github_pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+I then adapted this to my needs and wanted to deploy the new blog for the first time. But it didn't work.
+
 **to be continued ...**
