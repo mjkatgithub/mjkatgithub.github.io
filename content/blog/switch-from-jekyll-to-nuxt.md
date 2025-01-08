@@ -849,4 +849,6 @@ jobs:
 ```
 I then adapted this to my needs and wanted to deploy the new blog for the first time. But it didn't work.
 
-**to be continued ...**
+### replace the old repository
+
+unfortunately, something was often missing during prerendering. The yml file with the gitHub actions consists of 2 areas: `build` and `deploy`. `build` eventually worked, but assets were always missing during `deploy`. At some point I remembered the gh-pages npm package. I then installed it without further ado and it "worked" straight away. Except for the baseURL. But since I only wanted to have one blog anyway and only wanted to switch from jekyll to nuxt, I quickly deleted the jekyll repo and renamed the nuxt repo.
