@@ -6,13 +6,13 @@ categories:
 tags: [coding, vue, nuxt]
 comments: []
 excerpt_separator: <!--more-->
-draft: true
+draft: false
 ---
 # Switch from Jekyll to Nuxt
 
 I haven't use ruby for a while but more and more js/ts (especially vue) so i decided to switch from jekyll to nuxt, as I also like the benefits of autoloading components and server-side rendering with Nuxt.
 
-Also, in Nuxt, using NuxtContent, like in jekyll, I can save my content as mardown, which is then converted to html.
+Also, in Nuxt, using NuxtContent, like in jekyll, I can save my content as markdown, which is then converted to html.
 
 so the journey begins
 <!--more-->
@@ -580,7 +580,7 @@ body {
 
 Nuxt Content is a Nuxt module that enables us to render our Markdown posts from the Jekyll project.
 
-First of all, we need to install the module
+First I had to install the module
 
 ```console
 npm install --save-dev @nuxt/content
@@ -596,7 +596,7 @@ export default defineNuxtConfig({
 })
 ```
 
-We then create a directory called `content` in the root directory of our project and a directory called `blog` within it. All files from the `_posts` directory of the Jekyll project will now go into this directory.
+Then I created a directory called `content` in the root directory of my project and inside it a directory called `blog`. All files from the `_posts` directory of the Jekyll project now go into this directory.
 
 In order to render the posts, however, a "catchAllRoute" is required, i.e. a file with the name `[...slug].vue` in the Pages directory (more precisely in the blog subdirectory) which only contains the template with `<ContentDoc />` which loads and renders the content of the Markdown files.
 
