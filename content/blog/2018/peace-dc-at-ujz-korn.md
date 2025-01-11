@@ -1,11 +1,46 @@
 ---
-layout: post
 date: '2018-03-11'
 categories:
-- Mucke
-tags: [PeaceDC, peacedevelopmentcrew, ras-or, Live, Konzert]
-comments: []
+- concerts
+tags:
+  - PeaceDC
+  - peacedevelopmentcrew
+  - ras-or
+  - Live
+  - concert
+  - 'UJZ Korn'
 excerpt_separator: <!--more-->
+description: PeaceDC @ UJZ Korn
+head:
+  htmlAttrs:
+    lang: en
+  link:
+    - rel: 'icon'
+      type: 'mange/x-icon'
+      href: '/favicon.ico'
+  meta:
+    - name: 'keywords'
+      content: 'concert, Peace DC, peacedevelopmentcrew, ras-or, Live, UJZ Korn'
+    - name: 'robots'
+      content: 'index, follow'
+    - name: 'author'
+      content: 'Melchior Kannengießer'
+    - name: 'og:title'
+      content: 'mjk @ web - Peace DC Concert'
+    - name: 'og:description'
+      content: 'PeaceDC @ UJZ Korn'
+    - name: 'og:image'
+      content: '/logo_518x270.png'
+    - name: 'og:url'
+      content: 'http://www.mjkweb.de'
+    - name: 'twitter:title'
+      content: 'mjk @ web - Peace DC Concert'
+    - name: 'twitter:description'
+      content: 'PeaceDC @ UJZ Korn'
+    - name: 'twitter:image'
+      content: '/logo_200x200.png'
+    - name: 'twitter:card'
+      content: 'summary'
 ---
 # PeaceDC @ UJZ Korn
 

@@ -26,6 +26,33 @@
 </template>
 
 <script setup>
+
+useSeoMeta({
+  title: 'mjk @ web',
+  description: 'Blog posts about web development, programming, and other stuff',
+  ogTitle: 'mjk @ web',
+  ogDescription: 'Blog posts about web development, programming, and other stuff',
+  ogImage: '/logo_518x270.png',
+  ogUrl: 'http://www.mjkweb.de',
+  twitterTitle: 'mjk @ web',
+  twitterDescription: 'Blog posts about web development, programming, and other stuff',
+  twitterImage: '/logo_200x200.png',
+  twitterCard: 'summary'
+})
+
+useHead({
+  htmlAttrs: {
+    lang: 'en'
+  },
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    }
+  ]
+})
+
 const isDev = process.env.NODE_ENV === 'development'
 
 const { data } = await useAsyncData(

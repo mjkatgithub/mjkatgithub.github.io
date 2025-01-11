@@ -1,7 +1,35 @@
 ---
-layout: page
-permalink: /datenschutzerklaerung/
-weight: 3
+description: datenschutzerklaerung
+head:
+  htmlAttrs:
+    lang: en
+  link:
+    - rel: 'icon'
+      type: 'mange/x-icon'
+      href: '/favicon.ico'
+  meta:
+    - name: 'keywords'
+      content: 'datenschutzerklaerung'
+    - name: 'robots'
+      content: 'index, follow'
+    - name: 'author'
+      content: 'Melchior Kannengießer'
+    - name: 'og:title'
+      content: 'mjk @ web - datenschutzerklaerung'
+    - name: 'og:description'
+      content: 'datenschutzerklaerung'
+    - name: 'og:image'
+      content: '/logo_518x270.png'
+    - name: 'og:url'
+      content: 'http://www.mjkweb.de'
+    - name: 'twitter:title'
+      content: 'mjk @ web - datenschutzerklaerung'
+    - name: 'twitter:description'
+      content: 'datenschutzerklaerung'
+    - name: 'twitter:image'
+      content: '/logo_200x200.png'
+    - name: 'twitter:card'
+      content: 'summary'
 ---
 # Datenschutz-Erklärung
 
