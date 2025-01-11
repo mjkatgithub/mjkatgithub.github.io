@@ -1,12 +1,46 @@
 ---
-layout: post
 date: '2024-12-28'
 categories:
-- General
-tags: [coding, vue, nuxt]
-comments: []
+- programming
+tags:
+  - programming
+  - coding
+  - vue
+  - nuxt
+  - jekyll
 excerpt_separator: <!--more-->
 draft: false
+description: i decided to switch from jekyll to nuxt
+head:
+  htmlAttrs:
+    lang: en
+  link:
+    - rel: 'icon'
+      type: 'mange/x-icon'
+      href: '/favicon.ico'
+  meta:
+    - name: 'keywords'
+      content: 'programming, coding, vue, nuxt, jekyll'
+    - name: 'robots'
+      content: 'index, follow'
+    - name: 'author'
+      content: 'Melchior Kannengießer'
+    - name: 'og:title'
+      content: 'mjk @ web - Jekyll to Nuxt'
+    - name: 'og:description'
+      content: 'i decided to switch from jekyll to nuxt'
+    - name: 'og:image'
+      content: '/logo_518x270.png'
+    - name: 'og:url'
+      content: 'http://www.mjkweb.de'
+    - name: 'twitter:title'
+      content: 'mjk @ web - Jekyll to Nuxt'
+    - name: 'twitter:description'
+      content: 'i decided to switch from jekyll to nuxt'
+    - name: 'twitter:image'
+      content: '/logo_200x200.png'
+    - name: 'twitter:card'
+      content: 'summary'
 ---
 # Switch from Jekyll to Nuxt
 

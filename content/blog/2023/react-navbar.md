@@ -1,11 +1,43 @@
 ---
-layout: post
 date: '2023-02-12'
 categories:
-- Allgemein
-tags: [coding, react]
-comments: []
+- programming
+tags:
+  - coding
+  - programming
+  - react
 excerpt_separator: <!--more-->
+description: creating a react-navbar npm package
+head:
+  htmlAttrs:
+    lang: en
+  link:
+    - rel: 'icon'
+      type: 'mange/x-icon'
+      href: '/favicon.ico'
+  meta:
+    - name: 'keywords'
+      content: 'coding, programming, react'
+    - name: 'robots'
+      content: 'index, follow'
+    - name: 'author'
+      content: 'Melchior Kannengießer'
+    - name: 'og:title'
+      content: 'mjk @ web - x'
+    - name: 'og:description'
+      content: 'creating a react-navbar npm package'
+    - name: 'og:image'
+      content: '/logo_518x270.png'
+    - name: 'og:url'
+      content: 'http://www.mjkweb.de'
+    - name: 'twitter:title'
+      content: 'mjk @ web - x'
+    - name: 'twitter:description'
+      content: 'creating a react-navbar npm package'
+    - name: 'twitter:image'
+      content: '/logo_200x200.png'
+    - name: 'twitter:card'
+      content: 'summary'
 ---
 # react-navbar
 
