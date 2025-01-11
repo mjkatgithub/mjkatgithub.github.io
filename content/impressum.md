@@ -1,7 +1,35 @@
 ---
-layout: page
-permalink: /impressum/
-weight: 4
+description: impressum
+head:
+  htmlAttrs:
+    lang: en
+  link:
+    - rel: 'icon'
+      type: 'mange/x-icon'
+      href: '/favicon.ico'
+  meta:
+    - name: 'keywords'
+      content: 'impressum'
+    - name: 'robots'
+      content: 'index, follow'
+    - name: 'author'
+      content: 'Melchior Kannengießer'
+    - name: 'og:title'
+      content: 'mjk @ web - impressum'
+    - name: 'og:description'
+      content: 'impressum'
+    - name: 'og:image'
+      content: '/logo_518x270.png'
+    - name: 'og:url'
+      content: 'http://www.mjkweb.de'
+    - name: 'twitter:title'
+      content: 'mjk @ web - impressum'
+    - name: 'twitter:description'
+      content: 'impressum'
+    - name: 'twitter:image'
+      content: '/logo_200x200.png'
+    - name: 'twitter:card'
+      content: 'summary'
 ---
 # Impressum
 

@@ -1,11 +1,41 @@
 ---
-layout: post
 date: '2017-12-12 23:15:00 +0200'
 categories:
-- Allgemein
-tags: []
-comments: []
+- general
+tags:
+  - update
 excerpt_separator: <!--more-->
+description: "I'm back"
+head:
+  htmlAttrs:
+    lang: en
+  link:
+    - rel: 'icon'
+      type: 'mange/x-icon'
+      href: '/favicon.ico'
+  meta:
+    - name: 'keywords'
+      content: 'update'
+    - name: 'robots'
+      content: 'index, follow'
+    - name: 'author'
+      content: 'Melchior Kannengießer'
+    - name: 'og:title'
+      content: 'mjk @ web - update'
+    - name: 'og:description'
+      content: "I'm back"
+    - name: 'og:image'
+      content: '/logo_518x270.png'
+    - name: 'og:url'
+      content: 'http://www.mjkweb.de'
+    - name: 'twitter:title'
+      content: 'mjk @ web - update'
+    - name: 'twitter:description'
+      content: "I'm back"
+    - name: 'twitter:image'
+      content: '/logo_200x200.png'
+    - name: 'twitter:card'
+      content: 'summary'
 ---
 # update
 
