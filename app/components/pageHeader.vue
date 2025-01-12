@@ -7,6 +7,7 @@
     <nav :class="{ active: isMenuOpen }">
       <ul class="mainNav">
         <li><NuxtLink to="/about" @click="hideMenu">About</NuxtLink></li>
+        <li><NuxtLink to="/projects" @click="hideMenu">Projects</NuxtLink></li>
         <li><NuxtLink to="/links" @click="hideMenu">Links</NuxtLink></li>
         <li><NuxtLink to="/datenschutzerklaerung" @click="hideMenu">Datenschutz-Erklärung</NuxtLink></li>
         <li><NuxtLink to="/impressum" @click="hideMenu">Impressum</NuxtLink></li>
