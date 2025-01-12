@@ -33,6 +33,14 @@ head:
 ---
 # Links
 
+before my list
+
+::link-list
+
+::link-list
+
+after my list
+
 ## My Links
 
 [facebook](https://www.facebook.com/melcorethefirst/){:target="_blank"}  
