@@ -21,7 +21,7 @@ head:
     - name: 'og:image'
       content: '/logo_518x270.png'
     - name: 'og:url'
-      content: 'http://www.mjkweb.de'
+      content: 'https://mjkatgithub.github.io/links'
     - name: 'twitter:title'
       content: 'mjk @ web - links'
     - name: 'twitter:description'
@@ -33,62 +33,29 @@ head:
 ---
 # Links
 
-## projekte
+## My Links
 
-[peace development crew](http://www.peacedevelopmentcrew.de)
-Unsere Reggae-Band  
-[ras 'or](http://www.ras-or.com)
-Mein Dub und Drum 'n Bass Projekt  
-[Fame Design](http://www.fame-design.de)
-Mein Webdesign Projekt  
-[Better Live Movement](https://better-live-movement.github.io/)
-code to make your life better
+[facebook](https://www.facebook.com/melcorethefirst/){:target="_blank"}  
+[x.com](https://x.com/M_Kannengiesser){:target="_blank"}  
+[reddit](https://www.reddit.com/user/mjkatweb/){:target="_blank"}  
+[instagram](https://www.instagram.com/m_thefirst/){:target="_blank"}  
+[youtube](https://www.youtube.com/@MelchiorKannengieer){:target="_blank"}  
+[discord](https://discord.gg/ZsKEmD22gt){:target="_blank"}  
 
-[//]: # (## allgemeine links)
+## family & frinds
 
-[//]: # ()
-[//]: # ([Mein PGP-Key]&#40;http://downloads.mjkatweb.de/Melchior%20Kannengiesser@gmx.de%20melchior.kannengiesser@gmx.de%20%280x9DA550DE%29%20pub.asc&#41;)
-
-## meine wantlists
-
-[discogs](http://www.discogs.com/wantlist?user=ras-or)
-
-## dev
-
-[railsforzombies.org](http://railsforzombies.org/)  
-[tryruby.org](http://tryruby.org/)
-
-## family
-
-[orgel kanne](https://orgelkanne.de/)  
-[kunst kanne](http://www.kunstkanne.de/)  
-[Nine Medicines](http://www.ninemedicines.de/)  
-[jnfechtig.de](http://www.jnfechtig.de/)  
-[Rechtsanwaltskanzlei: Destrée Rybold Uhlich und Michael](http://www.kanzlei-uhlich.de/)
-
-## frinds
-
-[Batida Deloco](http://www.batidadeloco.de/)
-
-## webradios
-
-### goa / psytrance
-
-[goagemeinde.de/radio/](http://www.goagemeinde.de/radio/)  
-[HBR1 – Music on Futurenet](http://www.hbr1.com/)  
-[Radio Schizoid – PSYCHEDELIC TRANCE](http://schizoid.in/schizoid-psy.pls)
-
-### drum 'n bass / jungle
-
-[ukbassradio.com](http://ukbassradio.com/live/128k/listen.pls)  
-[www.bassdrive.com](http://www.bassdrive.com/v2/streams/BassDrive.pls)
-
-### various genres
-
-[www.di.fm](http://www.di.fm/)
+[orgel kanne](https://orgelkanne.de/){:target="_blank"}  
+[kunst kanne](http://www.kunstkanne.de/){:target="_blank"}  
+[Nine Medicines](http://www.ninemedicines.de/){:target="_blank"}  
+[jnfechtig.de](http://www.jnfechtig.de/){:target="_blank"}  
+[Rechtsanwaltskanzlei: Destrée Rybold Uhlich und Michael](http://www.kanzlei-uhlich.de/){:target="_blank"}  
+[Batida Deloco](http://www.batidadeloco.de/){:target="_blank"}  
 
 ## other stuff
 
-[the motherfuckingwebsite](http://motherfuckingwebsite.com/)  
-[readme](https://gist.github.com/endolith/2052778#file-readme-md)
-How to stream a webcam to a web browser in Ubuntu
+[HBR1 – Music on Futurenet](http://www.hbr1.com/){:target="_blank"}  
+[Radio Schizoid – PSYCHEDELIC TRANCE](http://schizoid.in/schizoid-psy.pls){:target="_blank"}  
+[ukbassradio.com](http://ukbassradio.com/live/128k/listen.pls){:target="_blank"}  
+[www.bassdrive.com](http://www.bassdrive.com/v2/streams/BassDrive.pls){:target="_blank"}  
+[the motherfuckingwebsite](http://motherfuckingwebsite.com/){:target="_blank"}  
+[readme](https://gist.github.com/endolith/2052778#file-readme-md){:target="_blank"}  
