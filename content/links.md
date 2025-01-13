@@ -30,6 +30,32 @@ head:
       content: '/logo_200x200.png'
     - name: 'twitter:card'
       content: 'summary'
+linkLists:
+  - myLinks:
+      - title: 'facebook'
+        url: 'https://www.facebook.com/melcorethefirst/'
+      - title: 'x.com'
+        url: 'https://x.com/M_Kannengiesser'
+      - title: 'reddit'
+        url: 'https://www.reddit.com/user/mjkatweb/'
+      - title: 'instagram'
+        url: 'https://www.instagram.com/m_thefirst/'
+      - title: 'youtube'
+        url: 'ttps://www.youtube.com/@MelchiorKannengieer'
+      - title: 'discord'
+        url: 'https://discord.gg/ZsKEmD22gt'
+  - familyAndFrinds:
+      - title: ''
+        url: ''
+      - title: ''
+        url: ''
+      - title: ''
+        url: ''
+      - title: ''
+        url: ''
+      - title: ''
+        url: ''                                
+  - otherStuff:
 ---
 # Links
 
