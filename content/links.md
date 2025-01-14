@@ -30,7 +30,7 @@ head:
       content: '/logo_200x200.png'
     - name: 'twitter:card'
       content: 'summary'
-linkLists:
+jsonProp:
   - myLinks:
       - title: 'facebook'
         url: 'https://www.facebook.com/melcorethefirst/'
@@ -44,28 +44,14 @@ linkLists:
         url: 'ttps://www.youtube.com/@MelchiorKannengieer'
       - title: 'discord'
         url: 'https://discord.gg/ZsKEmD22gt'
-  - familyAndFrinds:
-      - title: ''
-        url: ''
-      - title: ''
-        url: ''
-      - title: ''
-        url: ''
-      - title: ''
-        url: ''
-      - title: ''
-        url: ''                                
-  - otherStuff:
 ---
 # Links
 
 before my list
 
-::link-list
+::link-list :jsonProp="JSON.stringify(jsonProp)"
 
-::link-list
 
-after my list
 
 ## My Links
 
