@@ -1,6 +1,6 @@
 ---
 title: vue-navbar
-date: '2023-02-12'
+date: '2025-02-12'
 categories:
 - programming
 tags:
