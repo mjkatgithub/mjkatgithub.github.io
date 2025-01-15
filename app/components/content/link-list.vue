@@ -1,5 +1,6 @@
 <template>
   <div class="not-prose">
+    <p>Here you will find links to my social media and so on.</p>
     <div v-for="(linkSet, index) in linkSets" :key="index">
       <h2>{{ linkSet.title }}</h2>
       <ul class="grid grid-cols-1 gap-4">
@@ -13,40 +14,27 @@
 
 <script setup>
 
-const linkSets  = [
-  {
-    title: 'myLinks',
-    links: [
-      {title:'facebook',url:'https://www.facebook.com/melcorethefirst/',thumbnail:''},
-      {title:'x.com',url:'https://x.com/M_Kannengiesser',thumbnail:''},
-      {title:'reddit',url:'https://www.reddit.com/user/mjkatweb/',thumbnail:''},
-      {title:'instagram',url:'https://www.instagram.com/m_thefirst/',thumbnail:''},
-      {title:'youtube',url:'https://www.youtube.com/@MelchiorKannengieer',thumbnail:''},
-      {title:'discord',url:'https://discord.gg/ZsKEmD22gt',thumbnail:''}
-    ]
-  },
-  {
-    title: 'family & frinds',
-    links: [
-      {title:'orgel kanne',url:'https://orgelkanne.de/',thumbnail:''},
-      {title:'kunst kanne',url:'http://www.kunstkanne.de/',thumbnail:''},
-      {title:'Nine Medicines',url:'http://www.ninemedicines.de/',thumbnail:''},
-      {title:'jnfechtig.de',url:'http://www.jnfechtig.de/',thumbnail:''},
-      {title:'Rechtsanwaltskanzlei: Destrée Rybold Uhlich und Michael',url:'http://www.kanzlei-uhlich.de/',thumbnail:''},
-      {title:'Batida Deloco',url:'http://www.batidadeloco.de/',thumbnail:''},
-    ]
-  },
-  {
-    title: 'other stuff',
-    links: [
-      {title:'HBR1 – Music on Futurenet',url:'http://www.hbr1.com/',thumbnail:''},
-      {title:'Radio Schizoid – PSYCHEDELIC TRANCE',url:'http://schizoid.in/schizoid-psy.pls',thumbnail:''},
-      {title:'ukbassradio.com',url:'http://ukbassradio.com/live/128k/listen.pls',thumbnail:''},
-      {title:'www.bassdrive.com',url:'http://www.bassdrive.com/v2/streams/BassDrive.pls',thumbnail:''},
-      {title:'the motherfuckingwebsite',url:'http://motherfuckingwebsite.com/',thumbnail:''},
-      {title:'readme',url:'https://gist.github.com/endolith/2052778#file-readme-md',thumbnail:''},
-    ]
-  },
-]
+const {data: result} = await useAsyncData(
+  'link-sets',
+  () => queryContent('/')
+  .where({_file: 'link-sets.json'})
+  .only(['link-sets'])
+  .findOne()
+)
+
+const linkSets = result.value['link-sets']
 
 </script>
+
+<style>
+
+h2{
+  color: var(--tw-prose-headings);
+    font-weight: 700;
+    font-size: 1.5em;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    line-height: 1.3333333;
+}
+
+</style>
