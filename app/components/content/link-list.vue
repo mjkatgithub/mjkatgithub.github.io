@@ -6,7 +6,7 @@
       <ul class="grid grid-cols-1 gap-4">
         <li v-for="(link, index) in linkSet.links" :key="index">
           <a :href="link.url" target="_blank">
-            <div class="border border-gray-600 rounded-xl p-4 text-center">
+            <div class="border border-gray-600 rounded-xl p-4 text-center bg-gradient-to-t from-custom-gray to-custom-gray-light shadow-md">
               <div>
                 <img v-if="link.thumbnail" :src="link.thumbnail" alt="thumbnail" class="thumbnail">
               </div>
