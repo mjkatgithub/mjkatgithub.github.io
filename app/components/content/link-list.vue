@@ -43,5 +43,6 @@ h2{
 
 .thumbnail{
   position:absolute;
+  margin-top: -10px;
 }
 </style>
