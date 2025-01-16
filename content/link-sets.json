@@ -3,10 +3,10 @@
     {
       "title": "myLinks",
       "links": [
-        {"title":"facebook","url":"https://www.facebook.com/melcorethefirst/","thumbnail":""},
+        {"title":"facebook","url":"https://www.facebook.com/melcorethefirst/","thumbnail":"/assets/icons/facebook48.png"},
         {"title":"x.com","url":"https://x.com/M_Kannengiesser","thumbnail":""},
         {"title":"reddit","url":"https://www.reddit.com/user/mjkatweb/","thumbnail":""},
-        {"title":"instagram","url":"https://www.instagram.com/m_thefirst/","thumbnail":""},
+        {"title":"instagram","url":"https://www.instagram.com/m_thefirst/","thumbnail":"/assets/icons/instagram48.png"},
         {"title":"youtube","url":"https://www.youtube.com/@MelchiorKannengieer","thumbnail":""},
         {"title":"discord","url":"https://discord.gg/ZsKEmD22gt","thumbnail":""}
       ]

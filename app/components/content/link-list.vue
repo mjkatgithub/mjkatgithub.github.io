@@ -4,8 +4,15 @@
     <div v-for="(linkSet, index) in linkSets" :key="index">
       <h2>{{ linkSet.title }}</h2>
       <ul class="grid grid-cols-1 gap-4">
-        <li v-for="(link, index) in linkSet.links" :key="index" class="border border-gray-600 rounded-xl p-4 text-center">
-          <a :href="link.url" target="_blank">{{ link.title }}</a>
+        <li v-for="(link, index) in linkSet.links" :key="index">
+          <a :href="link.url" target="_blank">
+            <div class="border border-gray-600 rounded-xl p-4 text-center">
+              <div>
+                <img v-if="link.thumbnail" :src="link.thumbnail" alt="thumbnail" class="thumbnail">
+              </div>
+              <p>{{ link.title }}</p>
+            </div>
+          </a>
         </li>
       </ul>
     </div>
@@ -13,7 +20,6 @@
 </template>
 
 <script setup>
-
 const {data: result} = await useAsyncData(
   'link-sets',
   () => queryContent('/')
@@ -21,12 +27,10 @@ const {data: result} = await useAsyncData(
   .only(['link-sets'])
   .findOne()
 )
-
 const linkSets = result.value['link-sets']
-
 </script>
 
-<style>
+<style scoped>
 
 h2{
   color: var(--tw-prose-headings);
@@ -37,4 +41,7 @@ h2{
     line-height: 1.3333333;
 }
 
+.thumbnail{
+  position:absolute;
+}
 </style>
