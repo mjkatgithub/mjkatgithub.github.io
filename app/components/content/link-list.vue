@@ -3,7 +3,7 @@
     <p>Here you will find links to my social media and so on.</p>
     <div v-for="(linkSet, index) in linkSets" :key="index">
       <h2>{{ linkSet.title }}</h2>
-      <ul class="grid grid-cols-1 gap-4">
+      <ul class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <li v-for="(link, index) in linkSet.links" :key="index">
           <a :href="link.url" target="_blank">
             <div class="border border-gray-600 rounded-xl p-4 text-center bg-gradient-to-t from-custom-gray to-custom-gray-light shadow-md">
