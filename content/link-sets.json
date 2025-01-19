@@ -11,7 +11,7 @@
         {
           "title": "Discord",
           "url": "https://discord.gg/ZsKEmD22gt",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/discord.png"
         },
         {
           "title": "Youtube",
@@ -41,7 +41,7 @@
         {
           "title": "x.com",
           "url": "https://x.com/M_Kannengiesser",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/x.com.png"
         },
         {
           "title": "Reddit",
@@ -66,12 +66,12 @@
         {
           "title": "Kunst Kanne",
           "url": "http://www.kunstkanne.de/",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/kunst-kanne.png"
         },
         {
           "title": "Nine Medicines",
           "url": "http://www.ninemedicines.de/",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/nine-medicines.png"
         },
         {
           "title": "jnfechtig.de",
@@ -79,14 +79,14 @@
           "thumbnail": ""
         },
         {
-          "title": "Rechtsanwaltskanzlei: Destrée Rybold Uhlich und Michael",
+          "title": "Rechtsanwaltskanzlei Uhlich",
           "url": "http://www.kanzlei-uhlich.de/",
           "thumbnail": ""
         },
         {
           "title": "Peac Development Crew",
           "url": "https://peacedevelopmentcrew.de/",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/peac-development-crew.png"
         },
         {
           "title": "Batida Deloco",
