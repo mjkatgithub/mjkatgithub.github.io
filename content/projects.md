@@ -33,6 +33,6 @@ head:
 ---
 # Projects
 
-Check out some of my recent projects on GitHub!
+Check out some of my recent projects on [GitHub!](https://github.com/mjkatgithub){:target="_blank"}
 
 ::project-list
