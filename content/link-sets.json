@@ -1,10 +1,40 @@
 {
   "link-sets": [
     {
-      "title": "myLinks",
+      "title": "My Links",
       "links": [
         {
-          "title": "facebook",
+          "title": "mka @ matrix",
+          "url": "https://matrix.to/#/@mkaatmtrx:matrix.org",
+          "thumbnail": ""
+        },
+        {
+          "title": "Discord",
+          "url": "https://discord.gg/ZsKEmD22gt",
+          "thumbnail": ""
+        },
+        {
+          "title": "Youtube",
+          "url": "https://www.youtube.com/@MelchiorKannengieer",
+          "thumbnail": "/assets/icons/youtube48.png"
+        },
+        {
+          "title": "Instagram",
+          "url": "https://www.instagram.com/m_thefirst/",
+          "thumbnail": "/assets/icons/instagram48.png"
+        },
+        {
+          "title": "Twitch",
+          "url": "https://www.twitch.tv/melcorethefirst3",
+          "thumbnail": "/assets/icons/twitch.png"
+        },
+        {
+          "title": "Github",
+          "url": "https://github.com/mjkatgithub",
+          "thumbnail": "/assets/icons/github48.png"
+        },
+        {
+          "title": "Facebook",
           "url": "https://www.facebook.com/melcorethefirst/",
           "thumbnail": "/assets/icons/facebook48.png"
         },
@@ -14,37 +44,27 @@
           "thumbnail": ""
         },
         {
-          "title": "reddit",
+          "title": "Reddit",
           "url": "https://www.reddit.com/user/mjkatweb/",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/reddit48.png"
         },
         {
-          "title": "instagram",
-          "url": "https://www.instagram.com/m_thefirst/",
-          "thumbnail": "/assets/icons/instagram48.png"
-        },
-        {
-          "title": "youtube",
-          "url": "https://www.youtube.com/@MelchiorKannengieer",
-          "thumbnail": "/assets/icons/youtube.png"
-        },
-        {
-          "title": "discord",
-          "url": "https://discord.gg/ZsKEmD22gt",
-          "thumbnail": ""
+          "title": "Linktree",
+          "url": "https://linktr.ee/mjkatweb",
+          "thumbnail": "/assets/icons/linktree.png"
         }
       ]
     },
     {
-      "title": "family & frinds",
+      "title": "Family & Frinds",
       "links": [
         {
-          "title": "orgel kanne",
+          "title": "Orgel Kanne",
           "url": "https://orgelkanne.de/",
           "thumbnail": ""
         },
         {
-          "title": "kunst kanne",
+          "title": "Kunst Kanne",
           "url": "http://www.kunstkanne.de/",
           "thumbnail": ""
         },
@@ -64,44 +84,14 @@
           "thumbnail": ""
         },
         {
+          "title": "Peac Development Crew",
+          "url": "https://peacedevelopmentcrew.de/",
+          "thumbnail": ""
+        },
+        {
           "title": "Batida Deloco",
           "url": "http://www.batidadeloco.de/",
           "thumbnail": ""
-        }
-      ]
-    },
-    {
-      "title": "other stuff",
-      "links": [
-        {
-          "title": "HBR1 – Music on Futurenet",
-          "url": "http://www.hbr1.com/",
-          "thumbnail": ""
-        },
-        {
-          "title": "Radio Schizoid – PSYCHEDELIC TRANCE",
-          "url": "http://schizoid.in/schizoid-psy.pls",
-          "thumbnail": ""
-        },
-        {
-          "title": "ukbassradio.com",
-          "url": "http://ukbassradio.com/live/128k/listen.pls",
-          "thumbnail": "/assets/icons/ukbassradio.com.png"
-        },
-        {
-          "title": "www.bassdrive.com",
-          "url": "http://www.bassdrive.com/v2/streams/BassDrive.pls",
-          "thumbnail": ""
-        },
-        {
-          "title": "the motherfuckingwebsite",
-          "url": "http://motherfuckingwebsite.com/",
-          "thumbnail": ""
-        },
-        {
-          "title": "readme",
-          "url": "https://gist.github.com/endolith/2052778#file-readme-md",
-          "thumbnail": "/assets/icons/readme.png"
         }
       ]
     }
