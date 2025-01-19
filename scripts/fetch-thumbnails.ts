@@ -18,8 +18,13 @@ interface LinkSets {
   "link-sets": LinkSet[];
 }
 
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url); // Aktuelle Datei
+const __dirname = path.dirname(__filename); // Verzeichnis der Datei
+
 const jsonPath = path.resolve(__dirname, "../content/link-sets.json");
-const iconsPath = path.resolve(__dirname, "../public/assets/icons");
+const outputDir = path.resolve(__dirname, "../public/assets/icons");
 
 async function fetchOgImage(url: string): Promise<string | null> {
   try {
@@ -58,7 +63,7 @@ async function processLinks(): Promise<void> {
         const ogImage = await fetchOgImage(link.url);
         if (ogImage) {
           const fileName = `${link.title.replace(/\s+/g, "_").toLowerCase()}.png`;
-          const savePath = path.join(iconsPath, fileName);
+          const savePath = path.join(outputDir, fileName);
           await downloadAndResizeImage(ogImage, savePath);
           // Update JSON with the new thumbnail path
           link.thumbnail = `/assets/icons/${fileName}`;
