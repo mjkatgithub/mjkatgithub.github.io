@@ -1,0 +1,1 @@
+import{_ as a,o as s,c as o,a5 as r}from"./DGBdiqrs.js";const t={};function n(e,c){return s(),o("thead",null,[r(e.$slots,"default")])}const l=Object.assign(a(t,[["render",n]]),{__name:"ProseThead"});export{l as default};
