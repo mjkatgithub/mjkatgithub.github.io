@@ -6,7 +6,7 @@
         {
           "title": "mka @ matrix",
           "url": "https://matrix.to/#/@mkaatmtrx:matrix.org",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/matrix.png"
         },
         {
           "title": "Discord",
@@ -61,7 +61,7 @@
         {
           "title": "Orgel Kanne",
           "url": "https://orgelkanne.de/",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/fuk.png"
         },
         {
           "title": "Kunst Kanne",
@@ -71,7 +71,7 @@
         {
           "title": "Nine Medicines",
           "url": "http://www.ninemedicines.de/",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/nine.png"
         },
         {
           "title": "jnfechtig.de",
@@ -86,7 +86,7 @@
         {
           "title": "Peac Development Crew",
           "url": "https://peacedevelopmentcrew.de/",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/pdc.png"
         },
         {
           "title": "Batida Deloco",
