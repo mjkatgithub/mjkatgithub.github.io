@@ -4,6 +4,11 @@
       "title": "My Links",
       "links": [
         {
+          "title": "buy me something nice",
+          "url": "https://www.amazon.de/hz/wishlist/ls/27M80R0N4QZP1?ref_=wl_share",
+          "thumbnail": "/assets/icons/buy-me-something-nice.png"
+        },
+        {
           "title": "mka @ matrix",
           "url": "https://matrix.to/#/@mkaatmtrx:matrix.org",
           "thumbnail": "/assets/icons/matrix.png"
