@@ -1,0 +1,1 @@
+import{_ as s,o,c as r,a5 as t}from"./DRLLtvyK.js";const n={};function a(e,c){return o(),r("th",null,[t(e.$slots,"default")])}const l=Object.assign(s(n,[["render",a]]),{__name:"ProseTh"});export{l as default};
