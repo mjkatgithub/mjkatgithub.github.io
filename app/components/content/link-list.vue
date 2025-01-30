@@ -8,7 +8,7 @@
           <a :href="link.url" target="_blank">
             <div class="border border-gray-600 rounded-xl p-4 text-center bg-gradient-to-t from-custom-gray to-custom-gray-light shadow-md">
               <div>
-                <img v-if="link.thumbnail" :src="link.thumbnail" alt="thumbnail" class="thumbnail">
+                <img v-if="link.thumbnail && link.thumbnail != 'none'" :src="link.thumbnail" alt="thumbnail" class="thumbnail">
               </div>
               <p>{{ link.title }}</p>
             </div>
