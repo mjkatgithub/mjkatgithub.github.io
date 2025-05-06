@@ -40,6 +40,6 @@ This allows me to work on the Nuxt 3 upgrade without touching the production cod
 
 If you're using Git on Windows and don’t have access to a Bash shell, the command below should still work in PowerShell or your Git GUI. If you're not using Git at all, simply duplicate your project folder manually and work on the copy.
 
-At this stage, I also started looking into the official [Nuxt 3 upgrade guide](https://nuxt.com/docs/getting-started/upgrade#nuxt-2-to-nuxt-3). It gives a good overview of what has changed between Nuxt 2 and 3—from how routing works to how plugins, middleware, and API calls are structured.
+At this stage, I also started looking into the official [Nuxt 3 upgrade guide](https://nuxt.com/docs/getting-started/upgrade#nuxt-2-to-nuxt-3){:target="_blank"}. It gives a good overview of what has changed between Nuxt 2 and 3—from how routing works to how plugins, middleware, and API calls are structured.
 
 Finally, I listed all major dependencies in the project and began checking whether they are compatible with Nuxt 3 or if replacements are needed.
