@@ -43,3 +43,67 @@ If you're using Git on Windows and don’t have access to a Bash shell, the comm
 At this stage, I also started looking into the official [Nuxt 3 upgrade guide](https://nuxt.com/docs/getting-started/upgrade#nuxt-2-to-nuxt-3){:target="_blank"}. It gives a good overview of what has changed between Nuxt 2 and 3—from how routing works to how plugins, middleware, and API calls are structured.
 
 Finally, I listed all major dependencies in the project and began checking whether they are compatible with Nuxt 3 or if replacements are needed.
+
+## 2. Migration
+
+### 2.1 Updating Dependencies
+
+The first step in the actual migration process is to update the project dependencies. Since Nuxt 3 is built on top of Vue 3 and introduces a modernized architecture, many packages from the Nuxt 2 ecosystem are either no longer compatible or have been replaced by new solutions. Before making any code changes, it’s important to ensure that your dependencies are up to date and compatible with Nuxt 3.
+
+**How do you know which dependencies need to be updated or replaced?**
+
+Start by opening your `package.json` and making a list of all packages under `dependencies` and `devDependencies`. For each package, check the official documentation or GitHub repository to see if it supports Nuxt 3 (or Vue 3). The [Nuxt 3 upgrade guide](https://nuxt.com/docs/getting-started/upgrade#nuxt-2-to-nuxt-3) is a great starting point, and many popular Nuxt modules have their own migration guides or compatibility tables.
+
+Look out for these common patterns:
+- Packages starting with `@nuxtjs/` may need to be updated or replaced.
+- Any direct Vue 2 dependencies (like `vue`, `vuex`, `vue-router`, `vue-template-compiler`) should be removed or replaced with their Vue 3 equivalents.
+- If you’re unsure about a package, search for “Nuxt 3 support” or “Vue 3 support” in its documentation or issues.
+
+You can also use tools like [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) to quickly see which of your dependencies have newer versions available:
+```sh
+npx npm-check-updates
+```
+However, always double-check compatibility manually, as not every update is Nuxt 3-ready.
+
+In my own project, I identified the following outdated or incompatible dependencies:
+
+| Package                | Status in Nuxt 3         | Recommendation                                  |
+|------------------------|--------------------------|-------------------------------------------------|
+| nuxt                   | ❌ Not compatible         | Update to `nuxt@latest`                         |
+| vue                    | ❌ Not required           | Remove (Nuxt 3 includes Vue 3 internally)       |
+| vue-server-renderer    | ❌ Not required           | Remove                                          |
+| vue-template-compiler  | ❌ Not required           | Remove                                          |
+| @nuxtjs/vuetify        | ⚠️  Needs update          | Replace with latest Vuetify for Vue 3           |
+| core-js                | ✅ Compatible (optional)  | Keep if polyfills are needed                    |
+| compass-mixins         | ✅ Compatible             | Keep if used                                    |
+| push-dir               | ✅ Compatible             | Keep if used                                    |
+| sass                   | ✅ Compatible             | Keep                                            |
+| sass-loader            | ⚠️  Needs update          | Update to version 12 or higher                  |
+
+To update the dependencies, I used the following commands:
+
+```sh
+npm uninstall vue vue-server-renderer vue-template-compiler @nuxtjs/vuetify nuxt
+```
+
+> **Note:** At the time of writing, Nuxt 4 is already in beta. This means that running `npm install nuxt@latest` might soon install Nuxt 4 instead of Nuxt 3.
+> To make sure you’re installing Nuxt 3, use the explicit version tag:
+>
+> ```sh
+> npm install nuxt@3
+> ```
+>
+> This guarantees that you’re working with the stable Nuxt 3 release, which is what this migration guide is based on.
+
+```sh
+npm install nuxt@latest
+npm install vuetify@latest
+```
+
+```sh
+npm install --save-dev sass-loader@^12
+```
+
+After running these commands, my `package.json` was much cleaner and ready for the next steps in the migration.
+
+---
