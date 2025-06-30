@@ -8,7 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "deploy": "gh-pages -d dist -t --nojekyll",
+    "check-dates": "tsx scripts/check-blog-dates.ts",
+    "deploy": "npm run check-dates && gh-pages -d dist -t --nojekyll",
     "info": "gh-pages --help",
     "fetch-thumbnails": "node --loader ts-node/esm scripts/fetch-thumbnails.ts"
   },
@@ -28,8 +29,10 @@
     "@types/sharp": "^0.31.1",
     "@types/tailwindcss": "^3.0.11",
     "cheerio": "^1.0.0",
+    "gray-matter": "^4.0.3",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.20.3",
     "typescript": "^5.7.3"
   }
 }

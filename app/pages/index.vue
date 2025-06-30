@@ -83,7 +83,15 @@ const posts = computed(() => {
 })
 
 function formatDate(dateString) {
+  if (!dateString) {
+    console.error('Leeres Datum gefunden:', dateString)
+    return 'soon :tm:';
+  }
   const date = new Date(dateString)
+  if (isNaN(date)) {
+    console.error('Ungültiges Datum:', dateString)
+    return 'invalid date';
+  }
   return new Intl.DateTimeFormat('en-US', { month: 'short', day: '2-digit', year: 'numeric' }).format(date)
 }
 
