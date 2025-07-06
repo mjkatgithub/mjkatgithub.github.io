@@ -106,4 +106,114 @@ npm install --save-dev sass-loader@^12
 
 After running these commands, my `package.json` was much cleaner and ready for the next steps in the migration.
 
----
+### 2.2 Adapting the Codebase and Directory Structure
+
+With the dependencies updated, the next step is to adapt your codebase and project structure to match the conventions and requirements of Nuxt 3. Nuxt 3 introduces several architectural changes, including new directories, file naming conventions, and the removal or replacement of some legacy features.
+
+Start by reviewing the official [Nuxt 3 directory structure documentation](https://nuxt.com/docs/guide/directory-structure/overview) to get an overview of what’s new and what has changed.
+
+Some of the most important changes include:
+
+#### 2.2.1 Configuration file
+
+  Rename `nuxt.config.js` to `nuxt.config.ts` and update its syntax to use TypeScript and the new Nuxt 3 options.
+
+```sh
+# Rename your Nuxt config file to use TypeScript
+mv nuxt.config.js nuxt.config.ts
+```
+
+and use `defineNuxtConfig`. My `nuxt.config.ts` file now looks like this:
+
+```ts
+export default defineNuxtConfig({
+  // Target: Only 'static' or 'server' in Nuxt 2, in Nuxt 3 use 'ssr: false' for static
+  ssr: false, // Set to false if you want a static site
+  app: {
+    baseURL: '/kunstkanne/',
+    head: {
+      title: 'kunstkanne',
+      htmlAttrs: {
+        lang: 'en'
+      },
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'description', content: '' },
+        { name: 'format-detection', content: 'telephone=no' }
+      ],
+      link: [
+        { rel: 'apple-touch-icon', sizes: '180x180', type: 'image/x-icon', href: '/apple-touch-icon.png' },
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
+        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
+        { rel: 'manifest', href: '/site.webmanifest' }
+      ]
+    }
+  },
+  css: [
+    '~/assets/css/main.scss'
+  ],
+  components: true,
+  modules: [
+    // Add Nuxt 3 compatible modules here
+  ],
+  build: {
+    // Add custom build options if needed
+  }
+}) 
+```
+
+When migrating your Nuxt config from JavaScript to TypeScript (`nuxt.config.js` → `nuxt.config.ts`), you might encounter some common TypeScript or linter errors. Here are two typical issues and how to resolve them:
+
+- **Error:**  
+  `Cannot find name 'defineNuxtConfig'.`
+
+  This happens because TypeScript (and your linter) does not know about the special Nuxt 3 global types by default.
+
+  to fix this, add `"nuxt"` to the `types` array in your `tsconfig.json` file.
+  ```json
+  {
+    "compilerOptions": {
+      "types": ["nuxt"]
+    }
+  }
+  ```
+
+- **Error:**  
+  `Cannot read file './.nuxt/tsconfig.json'.`
+
+  This occurs if your `tsconfig.json` tries to extend a file that does not exist yet. The `.nuxt/tsconfig.json` file is generated only after the first build, so it should not be referenced directly in your main `tsconfig.json`.
+
+  ```json
+  {
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+      "moduleResolution": "Node",
+      "strict": true,
+      "jsx": "preserve",
+      "esModuleInterop": true,
+      "allowJs": true,
+      "skipLibCheck": true,
+      "types": ["nuxt"],
+      "baseUrl": ".",
+      "paths": {
+        "~/*": ["./*"],
+        "@/*": ["./*"]
+      }
+    },
+    "exclude": ["node_modules", ".output", ".nuxt", "dist"]
+  }
+  ```
+
+**What do these `tsconfig.json` options mean?**
+
+  - `target`, `module`, `moduleResolution`: Set the JavaScript version and module system for your project.
+  - `strict`: Enables strict type-checking for safer code.
+  - `jsx`: Allows Vue’s JSX/TSX support if needed.
+  - `esModuleInterop`, `allowJs`, `skipLibCheck`: Improve compatibility with JavaScript and third-party libraries.
+  - `types`: Ensures Nuxt’s global types (like `defineNuxtConfig`) are available everywhere.
+  - `baseUrl`, `paths`: Allow you to use `~/` and `@/` aliases in your imports.
+  - `exclude`: Prevents TypeScript from checking build and output folders.
+
+If you run into these errors, updating your `tsconfig.json` as shown above will resolve them and ensure a smooth TypeScript experience with Nuxt 3.
