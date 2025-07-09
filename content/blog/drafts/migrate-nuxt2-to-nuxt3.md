@@ -232,3 +232,29 @@ For example:
 # to:
 # /server/middleware/my-middleware.ts
 ```
+
+#### 2.2.3 Store
+
+In my project, I did not use Vuex or any other state management solution, so there was nothing to migrate for this step.
+
+If your project uses Vuex, you should consider migrating to [Pinia](https://pinia.vuejs.org/), the new recommended state management solution for Nuxt 3.  
+Here’s how you would do it:
+
+```sh
+# If you used Vuex, install Pinia and create a new store in the stores/ directory
+npm install pinia
+
+# Example: stores/counter.ts
+import { defineStore } from 'pinia'
+
+export const useCounterStore = defineStore('counter', {
+  state: () => ({
+    count: 0
+  }),
+  actions: {
+    increment() {
+      this.count++
+    }
+  }
+})
+```
