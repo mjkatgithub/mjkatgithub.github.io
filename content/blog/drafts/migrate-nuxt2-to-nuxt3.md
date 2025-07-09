@@ -258,3 +258,18 @@ export const useCounterStore = defineStore('counter', {
   }
 })
 ```
+
+#### 2.2.4 Plugins and composables
+
+In my project, I did not have any custom plugins or composables, so there was nothing to migrate for this step.
+
+If your project uses plugins or reusable logic (e.g. from `plugins/`, `utils/`, or mixins), you should move them to the new `composables/` directory and update their syntax to use the Composition API.  
+Here’s an example of a simple composable:
+
+```ts
+// Example: composables/useExample.ts
+export function useExample() {
+  const message = ref('Hello from a composable!')
+  return { message }
+}
+```
