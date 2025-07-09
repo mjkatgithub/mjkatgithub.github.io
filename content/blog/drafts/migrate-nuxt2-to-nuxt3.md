@@ -217,3 +217,18 @@ When migrating your Nuxt config from JavaScript to TypeScript (`nuxt.config.js` 
   - `exclude`: Prevents TypeScript from checking build and output folders.
 
 If you run into these errors, updating your `tsconfig.json` as shown above will resolve them and ensure a smooth TypeScript experience with Nuxt 3.
+
+#### 2.2.2 Middleware and server routes
+
+In my project, I did not have any custom server middleware or API routes, so there was nothing to migrate for this step.
+
+If you do have custom middleware, you should move them from the old `middleware/` directory to the new `server/middleware/` directory in Nuxt 3.  
+For example:
+
+```sh
+# Move your custom server middleware or API routes into the new server/ directory
+# For example, move from:
+# /middleware/my-middleware.js
+# to:
+# /server/middleware/my-middleware.ts
+```
