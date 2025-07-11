@@ -9,9 +9,40 @@ tags:
   - vue
   - nuxt
 excerpt_separator: <!--more-->
+description: A Real-World Migration
+head:
+  htmlAttrs:
+    lang: en
+  link:
+    - rel: 'icon'
+      type: 'mange/x-icon'
+      href: '/favicon.ico'
+  meta:
+    - name: 'keywords'
+      content: 'programming, coding, vue, nuxt, jekyll'
+    - name: 'robots'
+      content: 'index, follow'
+    - name: 'author'
+      content: 'Melchior Kannengießer'
+    - name: 'og:title'
+      content: 'Upgrading a Nuxt 2 Project to Nuxt 3'
+    - name: 'og:description'
+      content: 'A Real-World Migration'
+    - name: 'og:image'
+      content: '/logo_518x270.png'
+    - name: 'og:url'
+      content: 'http://www.mjkweb.de'
+    - name: 'twitter:title'
+      content: 'Upgrading a Nuxt 2 Project to Nuxt 3'
+    - name: 'twitter:description'
+      content: 'A Real-World Migration'
+    - name: 'twitter:image'
+      content: '/logo_200x200.png'
+    - name: 'twitter:card'
+      content: 'summary'
 ---
 
-# Upgrading a Nuxt 2 Project to Nuxt 3 – A Real-World Migration
+# Upgrading a Nuxt 2 Project to Nuxt 3
 
 Web technologies never stand still. With each new version, frameworks bring improvements in performance, developer experience, and long-term maintainability. That’s why I’ve decided to upgrade an existing Nuxt 2 project of mine to Nuxt 3.
 
@@ -400,3 +431,31 @@ After migration, the layout looked different:
 - Don’t be afraid to remove legacy code or dependencies that are no longer needed.
 
 Every migration is unique, but most issues can be solved with a bit of patience and by consulting the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/upgrade#nuxt-2-to-nuxt-3) and community resources.
+
+## 4. Conclusion
+
+### Summary of my experience
+
+Migrating from Nuxt 2 to Nuxt 3 was both a challenge and a great learning experience. While the process required a deep dive into the new architecture, updated conventions, and breaking changes, the end result is a more modern, maintainable, and performant codebase. The new features of Nuxt 3—like the Composition API, Vite integration, and the new directory structure—make development more enjoyable and future-proof.
+
+### Recommendations for others
+
+- **Read the official migration guide** before you start. It will save you a lot of time and confusion.
+- **Take it step by step:** Update dependencies, migrate config and structure, then tackle code and styling issues.
+- **Expect to break things:** Don’t be discouraged by errors—most are solvable with a bit of research and patience.
+- **Test early and often:** Run your app after every major change to catch issues before they pile up.
+- **Clean up your codebase:** Use the migration as an opportunity to remove unused dependencies, legacy code, and outdated patterns.
+- **Leverage the community:** If you get stuck, search GitHub issues, Discord, or the Nuxt forums—chances are, someone else had the same problem.
+- **Work in a dedicated migration branch:** This keeps your production code safe and lets you experiment freely.
+- **Document your process:** Writing down each step (or blogging about it) is invaluable for yourself and others.
+
+### What I would do differently next time
+
+- **Plan more time for CSS and layout adjustments:** Small differences in how styles are handled can have a big impact.
+- **Be prepared for subtle differences in tooling:** Especially with Vite and modern Sass, some things work differently than in the old Webpack world.
+- **Consider a full rewrite for very old projects:** Sometimes, starting from scratch with Nuxt 3 and porting over only the essentials is faster and cleaner.
+
+**Final thoughts:**  
+The migration to Nuxt 3 is absolutely worth it for most projects. The ecosystem is moving forward, and the new features and performance improvements are significant. With a bit of patience and a systematic approach, you’ll end up with a codebase that’s ready for the future.
+
+Good luck with your own migration!
