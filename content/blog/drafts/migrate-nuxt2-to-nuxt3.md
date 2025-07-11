@@ -273,3 +273,74 @@ export function useExample() {
   return { message }
 }
 ```
+
+#### 2.2.5 API requests
+
+In my project, I did not use the `$axios` module or make any direct API requests, so there was nothing to migrate for this step.
+
+If your project uses `$axios` (for example, `this.$axios.get('/api/data')`), you should migrate to the new Nuxt 3 composables like `useFetch` or `useAsyncData`.  
+Here’s an example of how you would do this:
+
+```js
+// Old (Nuxt 2, Options API)
+export default {
+  asyncData({ $axios }) {
+    return $axios.$get('/api/data')
+  }
+}
+
+// New (Nuxt 3, Composition API)
+<script setup>
+const { data } = await useFetch('/api/data')
+</script>
+```
+
+#### 2.2.6 Other breaking changes
+
+In my project, I did not encounter any additional breaking changes or deprecated features that required migration.  
+However, depending on your project, you may need to address some of the following changes. Here’s how these aspects differ between Nuxt 2 and Nuxt 3:
+
+**Directory structure**
+
+- **Nuxt 2:**  
+  Special folders like `middleware/`, `store/`, `plugins/`, `static/`, `assets/`, `pages/`, `components/`, `layouts/`
+- **Nuxt 3:**  
+  New folders like `server/` (for API routes and middleware), `composables/` (for reusable logic).  
+  Some folders (like `store/`) are now optional.
+
+**Global CSS and assets**
+
+- **Nuxt 2:**  
+  Add global CSS in `nuxt.config.js`:
+  ```js
+  css: [
+    '~/assets/css/main.scss'
+  ]
+  ```
+- **Nuxt 3:**  
+  Same principle, but in `nuxt.config.ts`:
+  ```ts
+  css: [
+    '~/assets/css/main.scss'
+  ]
+  ```
+
+**Deprecated features/APIs**
+
+- **Nuxt 2:**  
+  Features like `context.app`, `context.store`, automatic injection of `$axios`, etc.
+- **Nuxt 3:**  
+  Many of these features are removed or replaced by composables (e.g. `useFetch`, Pinia instead of Vuex, no automatic plugin injection).
+
+**Import aliases**
+
+- **Nuxt 2:**  
+  Usually `@/` and `~/` for imports, but sometimes not consistent.
+- **Nuxt 3:**  
+  The aliases `@/` and `~/` are still standard and should be used for all imports:
+  ```js
+  import MyComponent from '@/components/MyComponent.vue'
+  import { useExample } from '~/composables/useExample'
+  ```
+
+If you do run into issues, consult the [Nuxt 3 migration guide](https://nuxt.com/docs/getting-started/upgrade#nuxt-2-to-nuxt-3) and check the official documentation for any modules or features you use.
