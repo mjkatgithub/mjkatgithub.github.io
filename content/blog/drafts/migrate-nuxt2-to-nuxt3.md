@@ -344,3 +344,59 @@ However, depending on your project, you may need to address some of the followin
   ```
 
 If you do run into issues, consult the [Nuxt 3 migration guide](https://nuxt.com/docs/getting-started/upgrade#nuxt-2-to-nuxt-3) and check the official documentation for any modules or features you use.
+
+## 3. Challenges & Solutions
+
+No migration is ever completely smooth, and moving from Nuxt 2 to Nuxt 3 was no exception. Here are some of the main challenges I encountered during the process—and how I solved them:
+
+### 3.1 Dependency and Build Issues
+
+**Problem:**  
+After updating dependencies and running the dev server, I encountered errors like `Cannot find module 'bindings'` and issues related to `@vercel/nft`.
+
+**Solution:**  
+These errors were caused by leftover or broken dependencies from the old setup. Deleting `node_modules` and `package-lock.json` and running a fresh `npm install` resolved the issue.  
+If you see similar errors, always try a clean install first.
+
+### 3.2 TypeScript and Linter Errors
+
+**Problem:**  
+After converting `nuxt.config.js` to `nuxt.config.ts`, TypeScript complained about `defineNuxtConfig` not being found.
+
+**Solution:**  
+Add `"types": ["nuxt"]` to your `tsconfig.json` to make Nuxt 3’s global types available.  
+If you see errors about missing or unreadable `tsconfig.json` files, use a standalone config and do not extend from `.nuxt/tsconfig.json`.
+
+### 3.3 SCSS/Sass Import and Mixin Problems
+
+**Problem:**  
+Sass `@import` rules are deprecated, and Compass-Mixins are not compatible with Nuxt 3/Vite.  
+I also got errors like `Undefined mixin` and warnings about deprecated imports.
+
+**Solution:**  
+- Remove all Compass-Mixins and replace them with native CSS.
+- Switch from `@import` to the new `@use` syntax for SCSS files.
+- If you rely on variables or mixins across files, use the namespace provided by `@use`.
+
+### 3.4 Layout and Styling Differences
+
+**Problem:**  
+After migration, the layout looked different:  
+- The page had unwanted white margins.
+- Navigation links were stuck together.
+- The font was not loading.
+- The mobile navigation did not behave as expected.
+
+**Solution:**  
+- Add `body { margin: 0; padding: 0; }` to your global CSS to remove default browser margins.
+- Add or adjust CSS for the navigation to provide spacing between links.
+- Update font paths in SCSS to use the new Vite-compatible syntax (e.g. `@/assets/fonts/vivaldi.ttf`).
+- For the mobile navigation, implement a burger menu that closes when a link is clicked.
+
+### 3.5 General Advice
+
+- Test your app after every major migration step.
+- Use browser DevTools to debug layout and CSS issues.
+- Don’t be afraid to remove legacy code or dependencies that are no longer needed.
+
+Every migration is unique, but most issues can be solved with a bit of patience and by consulting the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/upgrade#nuxt-2-to-nuxt-3) and community resources.
