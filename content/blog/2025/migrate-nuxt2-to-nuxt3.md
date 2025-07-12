@@ -375,6 +375,30 @@ However, depending on your project, you may need to address some of the followin
 
 If you do run into issues, consult the [Nuxt 3 migration guide](https://nuxt.com/docs/getting-started/upgrade#nuxt-2-to-nuxt-3) and check the official documentation for any modules or features you use.
 
+### 2.3 Bonus: Nuxt 3/4 Features
+
+#### Automatic Component Imports
+
+One of the best quality-of-life improvements in Nuxt 3 is automatic component import.  
+You no longer need to manually import and register components from your `components/` directory—they are available globally in your templates.
+
+**Before (Nuxt 2):**
+```js
+import Header from '~/components/Header.vue'
+export default {
+  components: { Header }
+}
+```
+
+**Now (Nuxt 3):**
+```vue
+<template>
+  <Header />
+</template>
+```
+
+This makes your code cleaner and easier to maintain!
+
 ## 3. Challenges & Solutions
 
 No migration is ever completely smooth, and moving from Nuxt 2 to Nuxt 3 was no exception. Here are some of the main challenges I encountered during the process—and how I solved them:
