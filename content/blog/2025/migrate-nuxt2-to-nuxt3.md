@@ -330,7 +330,7 @@ const { data } = await useFetch('/api/data')
 In my project, I did not encounter any additional breaking changes or deprecated features that required migration.  
 However, depending on your project, you may need to address some of the following changes. Here’s how these aspects differ between Nuxt 2 and Nuxt 3:
 
-**Directory structure**
+##### Directory structure
 
 - **Nuxt 2:**  
   Special folders like `middleware/`, `store/`, `plugins/`, `static/`, `assets/`, `pages/`, `components/`, `layouts/`
@@ -338,7 +338,7 @@ However, depending on your project, you may need to address some of the followin
   New folders like `server/` (for API routes and middleware), `composables/` (for reusable logic).  
   Some folders (like `store/`) are now optional.
 
-**Global CSS and assets**
+##### Global CSS and assets
 
 - **Nuxt 2:**  
   Add global CSS in `nuxt.config.js`:
@@ -355,7 +355,34 @@ However, depending on your project, you may need to address some of the followin
   ]
   ```
 
-**Deprecated features/APIs**
+###### Migrating static assets and favicons
+
+In Nuxt 2, static files such as favicons, robots.txt, and other assets were placed in the static directory.  
+With Nuxt 3 and Nuxt 4, the static directory has been replaced by public.  
+All files that should be directly accessible (e.g. /favicon.ico, /site.webmanifest, images for Open Graph, etc.) must now be placed in the public folder at the project root.
+
+**Migration steps:**
+- Move all files from static to public.
+- Update any references in your configuration or templates if needed.
+- You can safely delete the old static directory after migrating.
+
+**Example structure:**  
+PLACEHOLDER_EXAMPLE_STRUCTURE
+
+```
+public/
+  favicon.ico
+  favicon-32x32.png
+  favicon-16x16.png
+  site.webmanifest
+  apple-touch-icon.png
+  android-chrome-512x512.png
+  android-chrome-192x192.png
+```
+
+This ensures that favicons and other static assets are correctly served in Nuxt 3/4.
+
+##### Deprecated features/APIs
 
 - **Nuxt 2:**  
   Features like `context.app`, `context.store`, automatic injection of `$axios`, etc.
@@ -422,6 +449,8 @@ my-nuxt-project/
 
 - Move your `components/`, `pages/`, and `layouts/` folders into the new `app/` directory.
 - Your `assets/`, `public/`, and `server/` folders remain at the project root.
+
+
 
 #### Nuxt 4 Compatibility Option
 
