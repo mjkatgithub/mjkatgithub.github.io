@@ -375,11 +375,11 @@ However, depending on your project, you may need to address some of the followin
 
 If you do run into issues, consult the [Nuxt 3 migration guide](https://nuxt.com/docs/getting-started/upgrade#nuxt-2-to-nuxt-3) and check the official documentation for any modules or features you use.
 
-### 2.3 Bonus: Nuxt 3/4 Features
+### 2.3 Bonus: Nuxt 3/4 Features & Folder Structure
 
 #### Automatic Component Imports
 
-One of the best quality-of-life improvements in Nuxt 3 is automatic component import.  
+One of the best quality-of-life improvements in Nuxt 3 and Nuxt 4 is automatic component import.  
 You no longer need to manually import and register components from your `components/` directory—they are available globally in your templates.
 
 **Before (Nuxt 2):**
@@ -390,7 +390,7 @@ export default {
 }
 ```
 
-**Now (Nuxt 3):**
+**Now (Nuxt 3/4):**
 ```vue
 <template>
   <Header />
@@ -398,6 +398,46 @@ export default {
 ```
 
 This makes your code cleaner and easier to maintain!
+
+#### Nuxt 4-Ready: Folder Structure
+
+With Nuxt 4, some directories are now expected to be inside the new `app/` directory.  
+Here’s how you should organize your project for Nuxt 4 compatibility:
+
+```
+my-nuxt-project/
+│
+├─ app/
+│   ├─ components/
+│   ├─ layouts/
+│   └─ pages/
+│
+├─ assets/
+├─ public/
+├─ server/
+├─ nuxt.config.ts
+├─ package.json
+└─ ...
+```
+
+- Move your `components/`, `pages/`, and `layouts/` folders into the new `app/` directory.
+- Your `assets/`, `public/`, and `server/` folders remain at the project root.
+
+#### Nuxt 4 Compatibility Option
+
+To make your project Nuxt 4 ready, add the following option to your `nuxt.config.ts`:
+
+[codeblock: nuxt4-future-option]
+```ts
+export default defineNuxtConfig({
+  // ...your other config options
+  future: {
+    compatibilityVersion: 4,
+  },
+})
+```
+
+This ensures your project uses the latest conventions and is prepared for the next major version.
 
 ## 3. Challenges & Solutions
 
