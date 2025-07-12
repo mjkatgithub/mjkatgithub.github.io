@@ -1,0 +1,1 @@
+import{_ as r,o as s,c as o,a5 as t}from"./czmp1Zo_.js";const n={};function a(e,c){return s(),o("tr",null,[t(e.$slots,"default")])}const l=Object.assign(r(n,[["render",a]]),{__name:"ProseTr"});export{l as default};
