@@ -495,6 +495,120 @@ After migration, the layout looked different:
 
 Every migration is unique, but most issues can be solved with a bit of patience and by consulting the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/upgrade#nuxt-2-to-nuxt-3) and community resources.
 
+## 3.6 Additional Issues After Removing Old Config and Enabling Nuxt 4 Compatibility
+
+After removing legacy configuration files and updating the project for Nuxt 4 compatibility, several common migration issues may arise. Here are some general patterns and solutions that apply to most Nuxt 3/4 migrations:
+
+### 3.6.1 SCSS/CSS Not Found
+
+**Problem:**  
+After updating the configuration, global SCSS or CSS files may no longer be found.  
+Typical error message:
+
+```
+Pre-transform error: Failed to resolve import "assets/css/main.scss"
+```
+
+**Solution:**  
+- Ensure the path in the css option of your Nuxt config is correct.
+- Do not use a tilde or leading slash.
+- In some cases, using an absolute path with a path join helper can help.
+
+```js
+import { join } from 'path'
+
+export default defineNuxtConfig({
+  css: [
+    join(__dirname, 'assets/css/main.scss')
+  ],
+  // ...other config options
+})
+```
+
+Always clear the cache after such changes:
+- Delete node_modules, .nuxt, and your lock file, then reinstall dependencies and restart the dev server.
+
+### 3.6.2 Images Not Found
+
+**Problem:**  
+After switching to Nuxt 3/4 and Vite, images previously loaded from the assets folder may no longer be found in templates.  
+Typical error message:
+
+```
+Failed to resolve import "/img/kanne.jpg"
+```
+
+**Solution:**  
+- Images used in templates (e.g. img src) must be moved to the public folder.
+- Update the paths in your templates to point to the correct location.
+
+```html
+<img src="/img/example.jpg" alt="Example">
+<img src="/img/gallery/picture.png" alt="Gallery Picture">
+<img src="/img/layout/header.jpg" alt="Header">
+```
+
+### 3.6.3 PowerShell: Copying Images
+
+**Problem:**  
+When copying images on Windows PowerShell, Unix commands like && or cp do not work.
+
+**Solution:**  
+- Create the folder structure with mkdir and use Copy-Item to move the images.
+
+for windows users
+```PowerShell
+mkdir public\img
+mkdir public\img\gallery
+mkdir public\img\layout
+
+Copy-Item assets\img\example.jpg public\img\
+Copy-Item assets\img\gallery\* public\img\gallery\
+Copy-Item assets\img\layout\* public\img\layout\
+```
+
+for linux macos users
+```Bash
+mkdir -p public/img/gallery
+mkdir -p public/img/layout
+
+cp assets/img/example.jpg public/img/
+cp assets/img/gallery/* public/img/gallery/
+cp assets/img/layout/* public/img/layout/
+```
+
+### 3.6.4 SCSS: @font-face Must Be Top-Level
+
+**Problem:**  
+A SCSS error may occur if the @font-face rule is nested inside a selector.  
+This causes the entire SCSS file to fail processing.
+
+**Solution:**  
+- The @font-face rule must be at the top level, not nested.
+
+```scss
+@font-face {
+  font-family: 'custom-font';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('@/assets/fonts/custom-font.ttf') format('truetype');
+}
+
+h1 {
+  font-family: 'custom-font', 'Segoe Script', 'sans-serif';
+}
+```
+
+### 3.6.5 Lessons Learned
+
+Especially after removing old config files and switching to Nuxt 4 standards, many legacy issues become visible.  
+Key takeaways:
+- Paths and imports must be exact.
+- Assets and static files must be strictly separated.
+- Clear caches regularly.
+- Pay attention to SCSS syntax.
+
 ## 4. Conclusion
 
 ### Summary of my experience
