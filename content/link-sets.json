@@ -104,6 +104,16 @@
           "thumbnail": ""
         }
       ]
+    },
+    {
+      "title": "Awesome Stuff i found on the internet",
+      "links": [
+        {
+          "title": "dub-siren.com",
+          "url": "https://dub-siren.com/",
+          "thumbnail": ""
+        }
+      ]
     }
   ]
 }
