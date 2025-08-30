@@ -524,6 +524,66 @@ After migration, the layout looked different:
 
 Every migration is unique, but most issues can be solved with a bit of patience and by consulting the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/upgrade#nuxt-2-to-nuxt-3) and community resources.
 
+## 3.x Font Handling and Modern SCSS in Nuxt 3
+
+One of the trickier parts of the migration was handling custom fonts and global styles in a way that works reliably with Nuxt 3 and Vite.
+
+### Font file location
+
+In Nuxt 2, font files could often be placed in the `assets` directory and would be processed by Webpack. With Nuxt 3 (and Vite), static assets like fonts and images that are referenced directly in HTML or CSS must be moved to the `public` directory. Only then will they be available at the expected path in the final build.
+
+**Example:**
+```
+public/fonts/vivaldi.ttf
+```
+
+### Global font and style inclusion
+
+Previously, it was common to use `@import` in SCSS to include global styles and fonts. With Nuxt 3 and Dart Sass, `@import` is deprecated and should be replaced by the new module system using `@use` and direct inclusion in the Nuxt config.
+
+**Old approach (deprecated):**
+```scss
+// Old (deprecated)
+@import './fonts.scss';
+```
+
+**Modern approach:**
+- The global font definition and h1 styling are placed in a dedicated file, e.g. `assets/css/fonts.scss`.
+- This file is included as a global CSS file in the Nuxt configuration.
+
+```scss
+@font-face {
+  font-family: 'Vivaldi-Regular';
+  src: url('/fonts/vivaldi.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1 {
+  font-family: 'Vivaldi-Regular', 'Segoe Script', 'sans-serif';
+}
+```
+
+**Nuxt configuration:**
+```ts
+import { join } from 'path';
+
+export default defineNuxtConfig({
+  css: [
+    join(__dirname, 'assets/css/fonts.scss'),
+    join(__dirname, 'assets/css/main.scss')
+  ],
+  // ... other options ...
+});
+```
+
+**Note:**
+Using `join(__dirname, ...)` ensures that the stylesheets are found reliably across different operating systems.
+
+---
+
+This approach keeps your font and global style handling future-proof and compatible with the latest Nuxt and Sass best practices.
+
 ## 3.6 Additional Issues After Removing Old Config and Enabling Nuxt 4 Compatibility
 
 After removing legacy configuration files and updating the project for Nuxt 4 compatibility, several common migration issues may arise. Here are some general patterns and solutions that apply to most Nuxt 3/4 migrations:
