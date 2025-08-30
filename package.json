@@ -9,7 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "check-dates": "tsx scripts/check-blog-dates.ts",
-    "deploy": "npm run check-dates && gh-pages -d dist -t --nojekyll",
+    "deploy": "npm run check-dates && npm run generate && gh-pages -d dist -t --nojekyll",
     "info": "gh-pages --help",
     "fetch-thumbnails": "node --loader ts-node/esm scripts/fetch-thumbnails.ts"
   },
