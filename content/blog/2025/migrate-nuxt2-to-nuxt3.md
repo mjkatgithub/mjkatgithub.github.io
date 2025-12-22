@@ -7,7 +7,7 @@ tags:
   - coding
   - vue
   - nuxt
-excerpt_separator: <!--more-->
+excerpt_separator: <!-- EXCERPT_END -->
 description: A Real-World Migration
 head:
   htmlAttrs:
@@ -53,7 +53,7 @@ This upgrade isn’t just about staying current—it’s a chance to revisit old
 
 In this blog post, I’ll document my migration process as it unfolds—step by step. The goal is to provide a transparent look at what’s involved in moving from Nuxt 2 to Nuxt 3, including the challenges I run into and how I solve them. Whether you're working on a personal project or maintaining something in production, I hope this will serve as a useful and honest guide.
 
-<!--more-->
+<!-- EXCERPT_END -->
 
 ## 1. Preparation
 
