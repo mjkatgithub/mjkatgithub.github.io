@@ -4,22 +4,27 @@
       <h1>Blog Posts</h1>
       <p>This are my recent blog posts</p>
     </article>
-    <article v-for="post in posts" :key="post._path" class="prose" style="margin-bottom: 1rem;">
+    <article v-for="post in posts" :key="post.path" class="prose" style="margin-bottom: 1rem;">
       <header>
-        <div>{{ post.date }}</div>
-        <h2><nuxt-link :to="post._path">{{ post.title }}</nuxt-link></h2>
+        <div v-if="post.date">{{ post.date }}</div>
+        <h2><nuxt-link :to="post.path">{{ post.title }}</nuxt-link></h2>
       </header>
-      <main v-if="'paragraphs' in post">
-        <p v-for="paragraph in post.paragraphs" :key="paragraph">
+      <main v-if="post.paragraphs && post.paragraphs.length > 0">
+        <p v-for="(paragraph, idx) in post.paragraphs" :key="idx">
           {{ paragraph }}
         </p>
       </main>
       <footer>
-        <span><b>Categories: </b></span>
-        <span v-for="category in post.categories" :key="category">{{ category }}, </span>
-        <span><b>Tags: </b></span>
-        <span v-for="tag in post.tags" :key="tag">{{ tag }}, </span><br />
-        <nuxt-link :to="post._path">read more</nuxt-link>
+        <span v-if="post.categories && post.categories.length > 0">
+          <b>Categories: </b>
+          <span v-for="category in post.categories" :key="category">{{ category }}, </span>
+        </span>
+        <span v-if="post.tags && post.tags.length > 0">
+          <b>Tags: </b>
+          <span v-for="tag in post.tags" :key="tag">{{ tag }}, </span>
+        </span>
+        <br v-if="(post.categories && post.categories.length > 0) || (post.tags && post.tags.length > 0)" />
+        <nuxt-link :to="post.path">read more</nuxt-link>
       </footer>
     </article>
   </section>
@@ -57,14 +62,36 @@ const isDev = process.env.NODE_ENV === 'development'
 
 const { data } = await useAsyncData(
   'blog-list',
-   () => {
-     const query = queryContent('/blog')
-       .only(['_path', 'title', 'date', 'excerpt', 'tags', 'categories'])
-       .sort({ date: -1 })
+   async () => {
+     // Versuche body explizit abzurufen
+     const allPosts = await queryCollection('blog')
+       .all()
+     
+     
+     // Filtere Drafts im Code, wenn nicht im Dev-Modus
+     let filtered = allPosts
      if (!isDev) {
-       query.where({ draft: { $ne: true } })
+       filtered = allPosts.filter(post => {
+         const draft = post.draft || post.meta?.draft
+         return !draft
+       })
      }
-     return query.find()
+     
+     // Sortiere nach Datum (neueste zuerst)
+     // Erstelle eine Kopie des Arrays, da sort() das Original mutiert
+     const sorted = [...filtered].sort((a, b) => {
+       const dateA = a.date ? new Date(a.date) : new Date(0)
+       const dateB = b.date ? new Date(b.date) : new Date(0)
+       
+       // Wenn Datum ungültig, ans Ende sortieren
+       if (isNaN(dateA.getTime())) return 1
+       if (isNaN(dateB.getTime())) return -1
+       
+       // Neueste zuerst (absteigend): dateB - dateA
+       return dateB.getTime() - dateA.getTime()
+     })
+     
+     return sorted
    }
 )
 
@@ -72,11 +99,92 @@ const posts = computed(() => {
   if (!data.value) {
     return []
   }
-  return data.value.map(post => {
+  
+  return data.value.map((post, index) => {
+    // Die Felder sind direkt verfügbar (nicht unter meta)
+    const excerpt = post.excerpt
+    let paragraphs = []
+    
+    
+    // Wenn excerpt der String "[object Object]" ist, extrahiere es aus body
+    if (excerpt === '[object Object]' || (typeof excerpt === 'string' && excerpt.length === 15 && excerpt === '[object Object]')) {
+      // Versuche excerpt aus body zu extrahieren
+      // In Nuxt Content 3.0 ist body eine AST-Struktur
+      if (post.body) {
+        // Extrahiere nur den Teil vor <!--more-->
+        paragraphs = extractParagraphsFromBody(post.body)
+      }
+    } else if (excerpt && excerpt !== '[object Object]') {
+      // Versuche verschiedene Excerpt-Formate
+      // In Nuxt Content 3.0 ist excerpt immer eine AST-Struktur
+      paragraphs = extractParagraphs(excerpt)
+    }
+    
+    // Stelle sicher, dass paragraphs nur Strings enthält
+    // Wenn paragraphs bereits ein Array von Strings ist (z.B. von String.split),
+    // behalte es so. Sonst flache Arrays ab und konvertiere alle zu Strings.
+    if (Array.isArray(paragraphs)) {
+      // Prüfe ob alle Elemente bereits Strings sind
+      const allStrings = paragraphs.every(p => typeof p === 'string')
+      
+      if (allStrings) {
+        // Alle sind bereits Strings, filtere nur leere heraus
+        // Da typeof bereits 'string' bestätigt, sollten diese primitiv sein
+        paragraphs = paragraphs.filter(p => {
+          // Filtere nur leere Strings heraus
+          if (!p) return false
+          if (typeof p !== 'string') return false
+          const trimmed = p.trim()
+          if (trimmed.length === 0) return false
+          if (trimmed === '[object Object]') return false
+          return true
+        })
+      } else {
+        // Nicht alle sind Strings, flache und konvertiere
+        const flattened = []
+        
+        function flattenArray(arr) {
+          if (!Array.isArray(arr)) {
+            arr = [arr]
+          }
+          
+          for (const item of arr) {
+            if (Array.isArray(item)) {
+              flattenArray(item)
+            } else if (typeof item === 'string') {
+              if (item.trim().length > 0 && item !== '[object Object]') {
+                flattened.push(item.trim())
+              }
+            } else if (typeof item === 'object' && item !== null) {
+              // Wenn es ein Objekt ist, versuche Text zu extrahieren
+              if (item.value && typeof item.value === 'string') {
+                flattened.push(item.value.trim())
+              } else if (item.type === 'text' && item.value) {
+                flattened.push(String(item.value).trim())
+              } else {
+                // Versuche es zu konvertieren, aber ignoriere [object Object]
+                const str = String(item)
+                if (str !== '[object Object]' && str.trim().length > 0) {
+                  flattened.push(str.trim())
+                }
+              }
+            }
+          }
+        }
+        
+        flattenArray(paragraphs)
+        paragraphs = flattened.filter(p => p && typeof p === 'string' && p.trim().length > 0)
+      }
+    } else {
+      paragraphs = []
+    }
+    
     const preview = {
       ...post,
       date: formatDate(post.date),
-      paragraphs: extractParagraphs(post.excerpt)
+      paragraphs: paragraphs,
+      tags: post.tags || [],
+      categories: post.categories || []
     }
     return preview
   })
@@ -84,33 +192,490 @@ const posts = computed(() => {
 
 function formatDate(dateString) {
   if (!dateString) {
-    console.error('Leeres Datum gefunden:', dateString)
-    return 'soon :tm:';
+    return ''
   }
   const date = new Date(dateString)
-  if (isNaN(date)) {
-    console.error('Ungültiges Datum:', dateString)
-    return 'invalid date';
+  if (isNaN(date.getTime())) {
+    return ''
   }
-  return new Intl.DateTimeFormat('en-US', { month: 'short', day: '2-digit', year: 'numeric' }).format(date)
+  return new Intl.DateTimeFormat('en-US', { 
+    month: 'short', 
+    day: '2-digit', 
+    year: 'numeric' 
+  }).format(date)
+}
+
+function extractParagraphsFromBody(body) {
+  if (!body) return []
+  
+  const paragraphs = []
+  let foundMoreSeparator = false
+  
+  // Rekursive Funktion zum Extrahieren von Text aus AST-Knoten
+  function extractTextFromNode(node) {
+    if (!node || typeof node !== 'object') return ''
+    
+    // Wenn es direkt Text ist
+    if (node.type === 'text' && typeof node.value === 'string') {
+      return node.value
+    }
+    
+    // Wenn es children hat, rekursiv Text extrahieren
+    if (node.children && Array.isArray(node.children)) {
+      const textParts = node.children
+        .map(child => {
+          if (child && typeof child === 'object') {
+            return extractTextFromNode(child)
+          }
+          return ''
+        })
+        .filter(part => typeof part === 'string' && part.length > 0)
+      
+      return textParts.join(' ')
+    }
+    
+    return ''
+  }
+  
+  // Funktion zum Prüfen, ob ein Knoten <!--more--> enthält
+  function checkForMoreSeparator(node) {
+    if (!node || foundMoreSeparator) return false
+    
+    // Wenn node ein Array ist (hast-Struktur: [tag, props, children])
+    if (Array.isArray(node)) {
+      const tag = node[0]
+      const children = node[2]
+      
+      // Prüfe auf comment/html tags
+      if (tag === 'comment' || tag === 'html') {
+        let commentText = ''
+        if (typeof children === 'string') {
+          commentText = children
+        } else if (Array.isArray(children) && children.length > 0) {
+          if (typeof children[0] === 'string') {
+            commentText = children[0]
+          }
+        }
+        if (commentText && commentText.includes('<!--more-->')) {
+          foundMoreSeparator = true
+          return true
+        }
+      }
+      
+      // Rekursiv durch children prüfen
+      if (Array.isArray(children)) {
+        for (const child of children) {
+          if (checkForMoreSeparator(child)) {
+            return true
+          }
+        }
+      }
+    } else if (typeof node === 'object' && node !== null) {
+      // Normale AST-Struktur
+      if (node.type === 'html' && typeof node.value === 'string' && node.value.includes('<!--more-->')) {
+        foundMoreSeparator = true
+        return true
+      }
+      
+      if (node.children && Array.isArray(node.children)) {
+        for (const child of node.children) {
+          if (checkForMoreSeparator(child)) {
+            return true
+          }
+        }
+      }
+    }
+    
+    return false
+  }
+  
+  // Durchlaufe die AST-Struktur und sammle Paragraphs bis zum <!--more--> Separator
+  function traverseNode(node) {
+    if (!node || foundMoreSeparator) return
+    
+    // Wenn node ein Array ist (hast-Struktur: [tag, props, children])
+    if (Array.isArray(node)) {
+      const tag = node[0]
+      const children = node[2]
+      
+      // WICHTIG: Prüfe zuerst alle children auf <!--more--> BEVOR Paragraphs extrahiert werden
+      if (Array.isArray(children) && !foundMoreSeparator) {
+        // Erste Runde: Suche nach <!--more--> in allen children
+        for (let i = 0; i < children.length; i++) {
+          const child = children[i]
+          
+          // Prüfe direkt auf comment/html tags in children
+          if (Array.isArray(child)) {
+            const childTag = child[0]
+            if (childTag === 'comment' || childTag === 'html') {
+              const childChildren = child[2]
+              let childText = ''
+              if (typeof childChildren === 'string') {
+                childText = childChildren
+              } else if (Array.isArray(childChildren) && childChildren.length > 0) {
+                if (typeof childChildren[0] === 'string') {
+                  childText = childChildren[0]
+                }
+              }
+              if (childText && childText.includes('<!--more-->')) {
+                foundMoreSeparator = true
+                // Stoppe vor diesem Knoten
+                break
+              }
+            }
+          }
+          
+          // Prüfe rekursiv
+          if (checkForMoreSeparator(child)) {
+            foundMoreSeparator = true
+            break
+          }
+        }
+      }
+      
+      // Wenn <!--more--> gefunden wurde, stoppe hier
+      if (foundMoreSeparator) return
+      
+      // Wenn es ein Paragraph-Tag ist und noch kein <!--more--> gefunden wurde
+      if (tag === 'p' && !foundMoreSeparator) {
+        const text = extractTextFromHastNode(node)
+        if (text && typeof text === 'string' && text.trim().length > 0) {
+          // Prüfe, ob der Text <!--more--> enthält
+          if (text.includes('<!--more-->')) {
+            // Teile den Text bei <!--more--> und nimm nur den ersten Teil
+            const parts = text.split('<!--more-->')
+            if (parts[0] && parts[0].trim().length > 0) {
+              paragraphs.push(parts[0].trim())
+            }
+            foundMoreSeparator = true
+          } else {
+            paragraphs.push(text.trim())
+          }
+        }
+      }
+      
+      // Rekursiv durch children gehen (nur wenn noch kein <!--more--> gefunden wurde)
+      if (Array.isArray(children) && !foundMoreSeparator) {
+        for (const child of children) {
+          if (foundMoreSeparator) break
+          traverseNode(child)
+        }
+      }
+      return
+    }
+    
+    // Normale AST-Struktur (Objekt mit type, children, etc.)
+    if (typeof node !== 'object') return
+    
+    // Wenn es ein HTML-Kommentar mit <!--more--> ist, stoppe die Extraktion
+    if (node.type === 'html' && typeof node.value === 'string' && node.value.includes('<!--more-->')) {
+      foundMoreSeparator = true
+      return
+    }
+    
+    // Prüfe auch auf HTML-Kommentare in children
+    if (node.children && Array.isArray(node.children)) {
+      for (const child of node.children) {
+        if (child && typeof child === 'object' && child.type === 'html' && 
+            typeof child.value === 'string' && child.value.includes('<!--more-->')) {
+          foundMoreSeparator = true
+          return
+        }
+      }
+    }
+    
+    // Wenn es ein Paragraph-Knoten ist
+    if (node.type === 'paragraph') {
+      const text = extractTextFromNode(node)
+      if (text && typeof text === 'string' && text.trim().length > 0) {
+        paragraphs.push(text.trim())
+      }
+    }
+    
+    // Wenn es ein Element mit tag 'p' ist (alte AST-Struktur)
+    if (node.type === 'element' && node.tag === 'p') {
+      const text = extractTextFromNode(node)
+      if (text && typeof text === 'string' && text.trim().length > 0) {
+        paragraphs.push(text.trim())
+      }
+    }
+    
+    // Wenn es children hat, rekursiv durchgehen
+    if (node.children && Array.isArray(node.children)) {
+      node.children.forEach(child => {
+        if (child && typeof child === 'object' && !foundMoreSeparator) {
+          traverseNode(child)
+        }
+      })
+    }
+  }
+  
+  // Funktion zum Extrahieren von Text aus hast-Knoten ([tag, props, children])
+  function extractTextFromHastNode(node) {
+    if (!node || !Array.isArray(node) || foundMoreSeparator) return ''
+    
+    const children = node[2]
+    if (!children) return ''
+    
+    if (typeof children === 'string') {
+      // Prüfe auf <!--more--> im Text
+      if (children.includes('<!--more-->')) {
+        foundMoreSeparator = true
+        return ''
+      }
+      return children
+    }
+    
+    if (Array.isArray(children)) {
+      const textParts = []
+      for (const child of children) {
+        if (foundMoreSeparator) break
+        
+        if (typeof child === 'string') {
+          if (child.includes('<!--more-->')) {
+            foundMoreSeparator = true
+            break
+          }
+          textParts.push(child)
+        } else if (Array.isArray(child)) {
+          const text = extractTextFromHastNode(child)
+          if (text) {
+            textParts.push(text)
+          }
+        }
+      }
+      return textParts
+        .filter(part => typeof part === 'string' && part.length > 0)
+        .join(' ')
+    }
+    
+    return ''
+  }
+  
+  // Wenn body ein Array ist, durchlaufe jeden Knoten
+  if (Array.isArray(body)) {
+    body.forEach(node => {
+      if (node && typeof node === 'object' && !foundMoreSeparator) {
+        traverseNode(node)
+      }
+    })
+  } else if (typeof body === 'object' && body !== null) {
+    // Wenn body ein Objekt ist, finde den root-Knoten
+    // In Nuxt Content 3.0 hat body eine value-Property mit der AST-Struktur
+    if (body.value) {
+      // body.value ist die eigentliche AST-Struktur
+      if (Array.isArray(body.value)) {
+        // body.value ist direkt ein Array von AST-Knoten
+        // WICHTIG: Durchlaufe sequenziell und prüfe jeden Knoten auf <!--more-->
+        for (let i = 0; i < body.value.length; i++) {
+          if (foundMoreSeparator) break
+          
+          const node = body.value[i]
+          if (!node || typeof node !== 'object') continue
+          
+          // Wenn node ein Array ist (hast-Struktur)
+          if (Array.isArray(node)) {
+            const tag = node[0]
+            const children = node[2]
+            
+            // Prüfe zuerst auf comment/html tags, die <!--more--> enthalten könnten
+            if (tag === 'comment' || tag === 'html') {
+              let commentText = ''
+              if (typeof children === 'string') {
+                commentText = children
+              } else if (Array.isArray(children) && children.length > 0) {
+                if (typeof children[0] === 'string') {
+                  commentText = children[0]
+                }
+              }
+              if (commentText && commentText.includes('<!--more-->')) {
+                foundMoreSeparator = true
+                break
+              }
+            }
+            
+            // Prüfe auch in children nach <!--more-->
+            if (Array.isArray(children) && !foundMoreSeparator) {
+              for (const child of children) {
+                if (Array.isArray(child)) {
+                  const childTag = child[0]
+                  if (childTag === 'comment' || childTag === 'html') {
+                    const childChildren = child[2]
+                    let childText = ''
+                    if (typeof childChildren === 'string') {
+                      childText = childChildren
+                    } else if (Array.isArray(childChildren) && childChildren.length > 0) {
+                      if (typeof childChildren[0] === 'string') {
+                        childText = childChildren[0]
+                      }
+                    }
+                    if (childText && childText.includes('<!--more-->')) {
+                      foundMoreSeparator = true
+                      break
+                    }
+                  }
+                }
+              }
+            }
+            
+            // Wenn <!--more--> gefunden wurde, stoppe hier
+            if (foundMoreSeparator) break
+            
+            // Wenn es ein Paragraph-Knoten ist, extrahiere den Text
+            if (tag === 'p' && !foundMoreSeparator) {
+              const text = extractTextFromHastNode(node)
+              if (text && typeof text === 'string' && text.trim().length > 0) {
+                if (text.includes('<!--more-->')) {
+                  const parts = text.split('<!--more-->')
+                  if (parts[0] && parts[0].trim().length > 0) {
+                    paragraphs.push(parts[0].trim())
+                  }
+                  foundMoreSeparator = true
+                  break
+                } else {
+                  paragraphs.push(text.trim())
+                }
+              }
+            } else if (!foundMoreSeparator) {
+              // Rekursiv traversieren für andere Knoten
+              traverseNode(node)
+            }
+          } else {
+            // Normale AST-Struktur
+            traverseNode(node)
+          }
+        }
+      } else if (typeof body.value === 'object' && body.value !== null) {
+        // body.value ist ein Objekt
+        if (body.value.children && Array.isArray(body.value.children)) {
+          body.value.children.forEach(child => {
+            if (child && typeof child === 'object' && !foundMoreSeparator) {
+              traverseNode(child)
+            }
+          })
+        } else {
+          traverseNode(body.value)
+        }
+      }
+    } else if (body.children && Array.isArray(body.children)) {
+      // Fallback: versuche body.children
+      body.children.forEach(child => {
+        if (child && typeof child === 'object' && !foundMoreSeparator) {
+          traverseNode(child)
+        }
+      })
+    } else {
+      // Fallback: versuche direkt zu traversieren
+      traverseNode(body)
+    }
+  }
+  
+  // Stelle sicher, dass nur Strings zurückgegeben werden
+  return paragraphs.filter(p => p && typeof p === 'string' && p.trim().length > 0)
 }
 
 function extractParagraphs(excerpt) {
-  const paragraphs = [];
-  function extractText(node) {
-    if (!node) return;
-    if (node.type === 'element' && node.tag === 'p') {
-      const paragraphText = node.children
-        .filter(child => child.type === 'text')
-        .map(child => child.value)
-        .join('');
-      paragraphs.push(paragraphText);
-    } else if (Array.isArray(node.children)) {
-      node.children.forEach(child => extractText(child));
+  if (!excerpt) return []
+  
+  // Wenn excerpt ein String ist, versuche es zu splitten
+  if (typeof excerpt === 'string') {
+    try {
+      const splitResult = excerpt.split('\n\n')
+      // Prüfe ob split() tatsächlich ein Array zurückgibt
+      if (Array.isArray(splitResult) && splitResult.length > 0) {
+        return splitResult.filter(p => p && p.trim().length > 0)
+      }
+    } catch (e) {
+      // Falls split() fehlschlägt, behandle es als AST
     }
   }
-  extractText(excerpt);
-  return paragraphs;
+  
+  // Wenn excerpt ein Array ist (Nuxt Content 3.0 - Array von Knoten)
+  const paragraphs = []
+  
+  // Rekursive Funktion zum Extrahieren von Text aus AST-Knoten
+  function extractTextFromNode(node) {
+    if (!node || typeof node !== 'object') return ''
+    
+    // Wenn es direkt Text ist
+    if (node.type === 'text' && typeof node.value === 'string') {
+      return node.value
+    }
+    
+    // Wenn es children hat, rekursiv Text extrahieren
+    if (node.children && Array.isArray(node.children)) {
+      const textParts = node.children
+        .map(child => {
+          if (child && typeof child === 'object') {
+            return extractTextFromNode(child)
+          }
+          return ''
+        })
+        .filter(part => typeof part === 'string' && part.length > 0)
+      
+      return textParts.join(' ')
+    }
+    
+    return ''
+  }
+  
+  // Durchlaufe die AST-Struktur und sammle Paragraphs
+  function traverseNode(node) {
+    if (!node || typeof node !== 'object') return
+    
+    // Wenn es ein Paragraph-Knoten ist
+    if (node.type === 'paragraph') {
+      const text = extractTextFromNode(node)
+      if (text && typeof text === 'string' && text.trim().length > 0) {
+        paragraphs.push(text.trim())
+      }
+    }
+    
+    // Wenn es ein Element mit tag 'p' ist (alte AST-Struktur)
+    if (node.type === 'element' && node.tag === 'p') {
+      const text = extractTextFromNode(node)
+      if (text && typeof text === 'string' && text.trim().length > 0) {
+        paragraphs.push(text.trim())
+      }
+    }
+    
+    // Wenn es children hat, rekursiv durchgehen
+    if (node.children && Array.isArray(node.children)) {
+      node.children.forEach(child => {
+        if (child && typeof child === 'object') {
+          traverseNode(child)
+        }
+      })
+    }
+  }
+  
+  // Wenn excerpt ein Array ist, durchlaufe jeden Knoten
+  if (Array.isArray(excerpt)) {
+    excerpt.forEach(node => {
+      if (node && typeof node === 'object') {
+        traverseNode(node)
+      }
+    })
+  } else if (typeof excerpt === 'object' && excerpt !== null) {
+    // Wenn excerpt ein Objekt ist, finde den root-Knoten
+    // Prüfe verschiedene mögliche Strukturen
+    if (excerpt.body && excerpt.body.children) {
+      traverseNode(excerpt.body)
+    } else if (excerpt.children) {
+      traverseNode(excerpt)
+    } else {
+      traverseNode(excerpt)
+    }
+  } else if (typeof excerpt === 'string') {
+    // Falls es doch ein String ist, versuche es zu splitten
+    const splitResult = excerpt.split('\n\n')
+    if (Array.isArray(splitResult)) {
+      return splitResult.filter(p => p && p.trim().length > 0)
+    }
+  }
+  
+  // Stelle sicher, dass nur Strings zurückgegeben werden
+  return paragraphs.filter(p => p && typeof p === 'string' && p.trim().length > 0)
 }
 
 </script>

@@ -20,14 +20,16 @@
 </template>
 
 <script setup>
-const {data: result} = await useAsyncData(
+const { data: result } = await useAsyncData(
   'link-sets',
-  () => queryContent('/')
-  .where({_file: 'link-sets.json'})
-  .only(['link-sets'])
-  .findOne()
+  async () => {
+    const doc = await queryCollection('data')
+      .path('/link-sets')
+      .first()
+    return doc
+  }
 )
-const linkSets = result.value['link-sets']
+const linkSets = result.value?.['link-sets'] || result.value
 </script>
 
 <style scoped>
