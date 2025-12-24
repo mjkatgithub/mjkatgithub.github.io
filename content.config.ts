@@ -6,8 +6,7 @@ export default defineContentConfig({
     blog: defineCollection({
       type: 'page',
       source: {
-        include: 'blog/**/*.md',
-        exclude: ['blog/drafts/**']
+        include: 'blog/**/*.md'
       },
       schema: z.object({
         title: z.string().optional(),

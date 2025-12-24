@@ -6,7 +6,9 @@
 
 <script setup>
 const route = useRoute()
-const isDev = process.env.NODE_ENV === 'development'
+// Prüfe, ob wir im Prerender/Generate-Modus sind
+const isPrerendering = import.meta.prerender || 
+                       process.env.NITRO_PRESET === 'static'
 
 // Prüfe, ob der Artikel ein Draft ist
 const { data: doc } = await useAsyncData(
@@ -23,12 +25,12 @@ const { data: doc } = await useAsyncData(
   }
 )
 
-// Wenn es ein Draft ist und nicht im Dev-Modus, 404 zurückgeben
+// Wenn es ein Draft ist und wir im Generate-Modus sind, 404 zurückgeben
 if (doc.value) {
   const isDraft = doc.value.draft === true || 
                   doc.value.path?.includes('/drafts/')
   
-  if (isDraft && !isDev) {
+  if (isDraft && isPrerendering) {
     throw createError({
       statusCode: 404,
       statusMessage: 'Page Not Found'

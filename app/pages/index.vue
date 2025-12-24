@@ -58,7 +58,9 @@ useHead({
   ]
 })
 
-const isDev = process.env.NODE_ENV === 'development'
+// Prüfe, ob wir im Prerender/Generate-Modus sind
+const isPrerendering = import.meta.prerender || 
+                       process.env.NITRO_PRESET === 'static'
 
 const { data } = await useAsyncData(
   'blog-list',
@@ -68,12 +70,15 @@ const { data } = await useAsyncData(
        .all()
      
      
-     // Filtere Drafts im Code, wenn nicht im Dev-Modus
+     // Filtere Drafts im Code, nur beim Generate (Prerender)
      let filtered = allPosts
-     if (!isDev) {
+     if (isPrerendering) {
        filtered = allPosts.filter(post => {
+         // Prüfe auf draft: true im Frontmatter
          const draft = post.draft || post.meta?.draft
-         return !draft
+         // Prüfe auf Pfad im drafts Ordner
+         const isInDraftsFolder = post.path?.includes('/drafts/')
+         return !draft && !isInDraftsFolder
        })
      }
      
