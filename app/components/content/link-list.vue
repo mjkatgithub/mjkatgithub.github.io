@@ -20,16 +20,57 @@
 </template>
 
 <script setup>
+// Lade die Link-Sets über queryCollection
 const { data: result } = await useAsyncData(
   'link-sets',
   async () => {
-    const doc = await queryCollection('data')
-      .path('/link-sets')
-      .first()
-    return doc
+    try {
+      // Lade alle Data-Collection Einträge
+      const allData = await queryCollection('data').all()
+      
+      // Finde die link-sets Datei - prüfe verschiedene Eigenschaften
+      const linkSetsDoc = allData.find(item => {
+        const id = item._id || item.id || item._path || item.path || ''
+        return String(id).includes('link-sets')
+      })
+      
+      if (linkSetsDoc) {
+        // Die Daten könnten in body, data oder direkt im Objekt sein
+        // Für JSON-Dateien sind die Daten meist direkt im Objekt
+        return linkSetsDoc.body || 
+               linkSetsDoc.data || 
+               linkSetsDoc
+      }
+      
+      return null
+    } catch (error) {
+      console.error('Error loading link-sets:', error)
+      return null
+    }
   }
 )
-const linkSets = result.value?.['link-sets'] || result.value
+
+const linkSets = computed(() => {
+  if (!result.value) {
+    return []
+  }
+  
+  // Die Datenstruktur in Nuxt 4 Content ist:
+  // result.value.meta['link-sets'] oder result.value.meta.body['link-sets']
+  
+  // Prüfe zuerst meta['link-sets']
+  if (result.value.meta?.['link-sets']) {
+    return result.value.meta['link-sets']
+  }
+  
+  // Prüfe meta.body['link-sets']
+  if (result.value.meta?.body?.['link-sets']) {
+    return result.value.meta.body['link-sets']
+  }
+  
+  // Fallback: leeres Array
+  return []
+})
 </script>
 
 <style scoped>
