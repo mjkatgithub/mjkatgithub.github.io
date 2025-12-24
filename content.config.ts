@@ -31,7 +31,8 @@ export default defineContentConfig({
       source: {
         include: '*.json',
         exclude: ['blog/**']
-      }
+      },
+      schema: z.any()
     })
   }
 })

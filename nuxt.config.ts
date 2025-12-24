@@ -6,9 +6,14 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxtjs/tailwindcss'
   ],
+  // @ts-ignore - content property is provided by @nuxt/content module
   content: {
-    highlight: {
-      theme: 'github-dark'
+    build: {
+      markdown: {
+        highlight: {
+          theme: 'material-theme'
+        }
+      }
     }
   },
   nitro: {
