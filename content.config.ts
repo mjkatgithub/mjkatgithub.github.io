@@ -15,7 +15,16 @@ export default defineContentConfig({
         categories: z.array(z.string()).optional(),
         draft: z.boolean().optional(),
         excerpt: z.any().optional(),
-        description: z.string().optional()
+        description: z.string().optional(),
+        head: z.object({
+          htmlAttrs: z.record(z.string(), z.any()).optional(),
+          link: z.array(z.any()).optional(),
+          meta: z.array(z.object({
+            name: z.string().optional(),
+            property: z.string().optional(),
+            content: z.string().optional()
+          })).optional()
+        }).optional()
       })
     }),
     pages: defineCollection({
@@ -23,7 +32,20 @@ export default defineContentConfig({
       source: {
         include: '*.md',
         exclude: ['blog/**']
-      }
+      },
+      schema: z.object({
+        title: z.string().optional(),
+        description: z.string().optional(),
+        head: z.object({
+          htmlAttrs: z.record(z.string(), z.any()).optional(),
+          link: z.array(z.any()).optional(),
+          meta: z.array(z.object({
+            name: z.string().optional(),
+            property: z.string().optional(),
+            content: z.string().optional()
+          })).optional()
+        }).optional()
+      })
     }),
     data: defineCollection({
       type: 'data',
