@@ -8,6 +8,7 @@
       <ul class="mainNav">
         <li><NuxtLink to="/about" @click="hideMenu">About</NuxtLink></li>
         <li><NuxtLink to="/projects" @click="hideMenu">Projects</NuxtLink></li>
+        <li><NuxtLink to="/" @click="hideMenu">Blog</NuxtLink></li>
         <li><NuxtLink to="/links" @click="hideMenu">Links</NuxtLink></li>
         <li><NuxtLink to="/datenschutzerklaerung" @click="hideMenu">Datenschutz-Erklärung</NuxtLink></li>
         <li><NuxtLink to="/impressum" @click="hideMenu">Impressum</NuxtLink></li>
@@ -117,7 +118,7 @@ nav.active {
 }
 
 /* Media Queries für größere Bildschirme */
-@media (min-width: 600px) {
+@media (min-width: 670px) {
   .mainNav {
     flex-direction: row;
     justify-content: center;
