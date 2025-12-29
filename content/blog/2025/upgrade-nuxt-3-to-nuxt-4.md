@@ -1,6 +1,6 @@
 ---
 title: Upgrading from Nuxt 3 to Nuxt 4
-date: '2025-12-24'
+date: '2025-12-29'
 categories:
   - programming
 tags:
@@ -9,7 +9,7 @@ tags:
   - vue
   - nuxt
 excerpt_separator: <!--more-->
-draft: true
+draft: false
 description: A Real-World Upgrade Experience
 head:
   htmlAttrs:
@@ -600,11 +600,10 @@ The Linxz project, which required a full structural migration, was actually the 
 
 ### What I would do differently next time
 
-- **Read the documentation before starting** - I should have consulted the Nuxt 4 upgrade guide first, even though I thought I didn't need to.
-- **Test one project at a time** - Upgrading three projects simultaneously made it harder to track which issues were project-specific vs. general.
-- **Document issues as they occur** - Keeping better notes during the upgrade would have made writing this blog post easier.
+- **Read the documentation before starting** - I should have consulted the Nuxt 4 upgrade guide first, even though I thought I didn't need to. This would have prepared me better for the Nuxt Content 3.x API changes.
+- **Investigate the root cause of dark mode issues** - Rather than simplifying to a workaround, I could have spent more time debugging why the template switching wasn't working. However, the workaround works fine for now.
 
 **Final thoughts:**  
-The upgrade to Nuxt 4 is worth it for most projects. The new features and improvements are significant, and the migration path is generally smoother than the Nuxt 2→3 migration. However, don't underestimate the work involved, especially if you're using Nuxt Content or have complex configurations. With a bit of patience and systematic problem-solving, you'll end up with a codebase that's ready for the future.
+The upgrade to Nuxt 4 is not just worth it—it's necessary. With Nuxt 3 reaching end of life in January 2026, staying on Nuxt 3 means missing out on security updates and long-term support. The migration path is generally smoother than the Nuxt 2→3 migration, and the new features and improvements are significant. However, don't underestimate the work involved, especially if you're using Nuxt Content or have complex configurations. With a bit of patience and systematic problem-solving, you'll end up with a codebase that's ready for the future.
 
 Good luck with your own upgrade!
