@@ -140,6 +140,95 @@ nav.active {
     border-radius: 20px 20px 0 0;
     border: 1px solid black;
     border-bottom: 0px;
+    background: #415c7b;
+    display: block;
+    padding: 0;
+    border-radius: 20px 20px 0px 0px;
+  }
+
+  .branding {
+    border-radius: 20px 20px 0px 0px;
+    background: linear-gradient(to bottom, #0c5688 0%,#317bab 27%,#3780af 30%,#61a2ca 36%,#accce1 47%,#b2d0e3 48%,#f7f7f9 53%,#bcbfc9 54%,#40526d 54%,#19304f 55%,#0b2345 56%,#396587 56%,#548cad 57%,#65a4c5 58%,#71b5d6 58%,#7ac0e1 59%,#7fc8e9 60%,#82ceef 60%,#85d1f2 62%,#4e7a9a 76%,#182442 100%);
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .branding .logo {
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin-top: 3px!important;
+    -webkit-box-reflect: below -10px
+      -webkit-linear-gradient(
+        top,
+        rgba(0,0,0,0) 25%,
+        rgba(255,255,255,1) 100%
+      );
+  }
+
+
+  .pageHeader nav {
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .mainNav {
+    background: linear-gradient(to bottom, rgba(108,170,209,1) 0%,rgba(80,125,155,1) 49%,rgba(71,110,135,1) 50%,rgba(95,148,183,1) 100%);
+    display: inline-block;
+    border: 1px solid #4a728c;
+    border-color: #5a829c #4a728c #3a627c;
+    border-radius: 0;
+    -webkit-box-shadow: 0 1px 1px #415c7b, 
+      inset 0 1px 0 rgba(108,170,209, 0.5);
+    -moz-box-shadow: 0 1px 1px #415c7b, 
+      inset 0 1px 0 rgba(108,170,209, 0.5);
+    box-shadow: 0px 1px 2px #415c7b, 
+      inset 0 1px 0 rgba(108,170,209, 0.5);
+  }
+
+  .mainNav li {
+    float: left;
+    position: relative;
+    list-style: none;
+  }
+
+  .mainNav li a {
+    font-weight: bolder;
+    font-size: 1.1rem;
+    padding: 8px 20px;
+    text-decoration: none;
+    display: block;
+    /* color: #026; */
+    text-shadow: 0px 1px 0px rgba(108,170,209, 0.55);
+  }
+
+  .mainNav li:hover > a {
+    color: #000;
+    text-shadow: 0px 1px 0px rgba(95,148,183, 0.55);
+    -webkit-box-shadow: 0px 1px 1px 0px rgba(71,110,135, 0.2);
+    -moz-box-shadow: 0px 1px 1px 0px rgba(71,110,135, 0.2);
+    box-shadow: 0px 1px 1px 0px rgba(71,110,135, 0.2);
+    background: #67a2c6;
+    background: -moz-linear-gradient(top, #67a2c6 0%, #4e7996 49%, #4a728c 50%, #5a8dad 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#67a2c6), color-stop(49%,#4e7996), color-stop(50%,#4a728c), color-stop(100%,#5a8dad));
+    background: -webkit-linear-gradient(top, #67a2c6 0%,#4e7996 49%,#4a728c 50%,#5a8dad 100%);
+    background: -o-linear-gradient(top, #67a2c6 0%,#4e7996 49%,#4a728c 50%,#5a8dad 100%);
+    background: -ms-linear-gradient(top, #67a2c6 0%,#4e7996 49%,#4a728c 50%,#5a8dad 100%);
+    background: linear-gradient(to bottom, #67a2c6 0%,#4e7996 49%,#4a728c 50%,#5a8dad 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#67a2c6', endColorstr='#5a8dad',GradientType=0 );
+  }
+
+  .mainNav:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
   }
 }
 
