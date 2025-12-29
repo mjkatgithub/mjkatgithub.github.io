@@ -8,7 +8,7 @@ tags:
   - vue
   - nuxt
   - jekyll
-excerpt_separator: <!--more-->
+excerpt_separator: <!-- EXCERPT_END -->
 draft: false
 description: i decided to switch from jekyll to nuxt
 head:
@@ -49,7 +49,7 @@ I haven't use ruby for a while but more and more js/ts (especially vue) so i dec
 Also, in Nuxt, using NuxtContent, like in jekyll, I can save my content as markdown, which is then converted to html.
 
 so the journey begins
-<!--more-->
+<!-- EXCERPT_END -->
 ## initializing a new nuxt project
 
 initializing a new nuxt project is very easy.

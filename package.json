@@ -8,28 +8,33 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "deploy": "gh-pages -d dist -t --nojekyll",
+    "check-dates": "tsx scripts/check-blog-dates.ts",
+    "deploy": "npm run check-dates && npm run generate && gh-pages -d dist -t --nojekyll",
     "info": "gh-pages --help",
     "fetch-thumbnails": "node --loader ts-node/esm scripts/fetch-thumbnails.ts"
   },
   "dependencies": {
+    "better-sqlite3": "^12.5.0",
     "gh-pages": "^6.3.0",
     "node-fetch": "^3.3.2",
-    "nuxt": "^3.15.0",
+    "nuxt": "^4.0.0",
     "sharp": "^0.33.5",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "zod": "^4.2.1"
   },
   "devDependencies": {
-    "@nuxt/content": "^2.13.4",
+    "@nuxt/content": "^3.0.0",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22.10.7",
     "@types/sharp": "^0.31.1",
     "@types/tailwindcss": "^3.0.11",
     "cheerio": "^1.0.0",
+    "gray-matter": "^4.0.3",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.20.3",
     "typescript": "^5.7.3"
   }
 }

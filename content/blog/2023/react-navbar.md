@@ -6,7 +6,7 @@ tags:
   - coding
   - programming
   - react
-excerpt_separator: <!--more-->
+excerpt_separator: <!-- EXCERPT_END -->
 description: creating a react-navbar npm package
 head:
   htmlAttrs:
@@ -47,7 +47,7 @@ I want to change that and I think this is the perfect topic to write an post abo
 I actually intended to program a react-native app. Then I thought it wouldn't hurt to refresh my knowledge about react-js before I get into react-native.
 
 And this is where the story begins.
-<!--more-->
+<!-- EXCERPT_END -->
 ## practice reactjs
 
 First of all I had to decide what I want to do. I didn't want to code a todo list for the umpteenth time, but something useful. Some time ago I discovered GatsbyJS and played around with it. I realy like Jekyll but I also like the concept behind ReactJS. So I decided to code a reactjs-component which I can reuse in other projects.

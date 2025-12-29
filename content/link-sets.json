@@ -4,14 +4,19 @@
       "title": "My Links",
       "links": [
         {
+          "title": "buy me something nice",
+          "url": "https://www.amazon.de/hz/wishlist/ls/27M80R0N4QZP1?ref_=wl_share",
+          "thumbnail": "/assets/icons/buy-me-something-nice.png"
+        },
+        {
           "title": "mka @ matrix",
           "url": "https://matrix.to/#/@mkaatmtrx:matrix.org",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/matrix.png"
         },
         {
           "title": "Discord",
           "url": "https://discord.gg/ZsKEmD22gt",
-          "thumbnail": ""
+          "thumbnail": "none"
         },
         {
           "title": "Youtube",
@@ -45,13 +50,18 @@
         },
         {
           "title": "Reddit",
-          "url": "https://www.reddit.com/user/mjkatweb/",
+          "url": "https://www.reddit.com/user/sudoKnechtRootRecht/",
           "thumbnail": "/assets/icons/reddit48.png"
         },
         {
           "title": "Linktree",
           "url": "https://linktr.ee/mjkatweb",
           "thumbnail": "/assets/icons/linktree.png"
+        },
+        {
+          "title": "steemit",
+          "url": "https://steemit.com/@mjkatweb",
+          "thumbnail": "/assets/icons/steemit.png"
         }
       ]
     },
@@ -61,7 +71,7 @@
         {
           "title": "Orgel Kanne",
           "url": "https://orgelkanne.de/",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/fuk.png"
         },
         {
           "title": "Kunst Kanne",
@@ -71,7 +81,7 @@
         {
           "title": "Nine Medicines",
           "url": "http://www.ninemedicines.de/",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/nine.png"
         },
         {
           "title": "jnfechtig.de",
@@ -86,11 +96,21 @@
         {
           "title": "Peac Development Crew",
           "url": "https://peacedevelopmentcrew.de/",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/pdc.png"
         },
         {
           "title": "Batida Deloco",
           "url": "http://www.batidadeloco.de/",
+          "thumbnail": ""
+        }
+      ]
+    },
+    {
+      "title": "Awesome Stuff i found on the internet",
+      "links": [
+        {
+          "title": "dub-siren.com",
+          "url": "https://dub-siren.com/",
           "thumbnail": ""
         }
       ]

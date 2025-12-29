@@ -4,7 +4,7 @@ categories:
 - general
 tags:
   - update
-excerpt_separator: <!--more-->
+excerpt_separator: <!-- EXCERPT_END -->
 description: "I'm back"
 head:
   htmlAttrs:
@@ -40,7 +40,7 @@ head:
 # update
 
 It's been a long time since I posted anything here. Nothing happened since 2014! That should change now. I'll integrate tags in the near future and continue to post this and that, but focus on some highlights. Well, and hopefully I'll add the social media links soon. ;-)
-<!--more-->
+<!-- EXCERPT_END -->
 ## Webdevelopment
 
 Speaking about several technologies, some Ideas I have for awesome projects in the future and Web Development in general. For more fun I’ll also add some basic syntax highlighting.
