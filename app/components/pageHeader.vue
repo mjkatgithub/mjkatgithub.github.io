@@ -159,14 +159,35 @@ nav.active {
 
   .branding .logo {
     font-weight: bold;
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-top: 3px!important;
-    -webkit-box-reflect: below -10px
+    position: relative;
+    display: inline-block;
+    -webkit-box-reflect: below -17px
       -webkit-linear-gradient(
         top,
         rgba(0,0,0,0) 25%,
         rgba(255,255,255,1) 100%
       );
+  }
+
+  .branding .logo::before {
+    content: "mjk @ web";
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    transform: translate(-50%, 1px);
+    z-index: -1;
+    font-weight: bold;
+    font-size: 3rem;
+    line-height: 1;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: 1px;
+    background: linear-gradient(to bottom, #ff2b2b 0%,#fcf400 50%,#00ff00 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
 
