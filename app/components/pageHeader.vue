@@ -200,17 +200,20 @@ nav.active {
   }
 
   .mainNav {
-    background: linear-gradient(to bottom, rgba(108,170,209,1) 0%,rgba(80,125,155,1) 49%,rgba(71,110,135,1) 50%,rgba(95,148,183,1) 100%);
+    background: linear-gradient(to bottom, rgba(125,185,225,1) 0%,rgba(85,140,170,1) 49%,rgba(65,100,120,1) 50%,rgba(90,145,175,1) 100%);
     display: inline-block;
     border: 1px solid #4a728c;
     border-color: #5a829c #4a728c #3a627c;
     border-radius: 15px;
     -webkit-box-shadow: 0 1px 1px #415c7b, 
-      inset 0 1px 0 rgba(108,170,209, 0.5);
+      inset 0 2px 4px rgba(255,255,255, 0.3),
+      inset 0 1px 0 rgba(108,170,209, 0.8);
     -moz-box-shadow: 0 1px 1px #415c7b, 
-      inset 0 1px 0 rgba(108,170,209, 0.5);
+      inset 0 2px 4px rgba(255,255,255, 0.3),
+      inset 0 1px 0 rgba(108,170,209, 0.8);
     box-shadow: 0px 1px 2px #415c7b, 
-      inset 0 1px 0 rgba(108,170,209, 0.5);
+      inset 0 2px 4px rgba(255,255,255, 0.3),
+      inset 0 1px 0 rgba(108,170,209, 0.8);
   }
 
   .mainNav li {
