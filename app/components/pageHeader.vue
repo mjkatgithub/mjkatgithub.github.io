@@ -193,6 +193,7 @@ nav.active {
 
   .pageHeader nav {
     margin-top: 10px;
+    margin-bottom: -10px;
     display: block;
     width: 100%;
     text-align: center;
@@ -203,7 +204,7 @@ nav.active {
     display: inline-block;
     border: 1px solid #4a728c;
     border-color: #5a829c #4a728c #3a627c;
-    border-radius: 0;
+    border-radius: 15px;
     -webkit-box-shadow: 0 1px 1px #415c7b, 
       inset 0 1px 0 rgba(108,170,209, 0.5);
     -moz-box-shadow: 0 1px 1px #415c7b, 
@@ -242,6 +243,14 @@ nav.active {
     background: -ms-linear-gradient(top, #67a2c6 0%,#4e7996 49%,#4a728c 50%,#5a8dad 100%);
     background: linear-gradient(to bottom, #67a2c6 0%,#4e7996 49%,#4a728c 50%,#5a8dad 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#67a2c6', endColorstr='#5a8dad',GradientType=0 );
+  }
+
+  .mainNav li:first-child:hover > a {
+    border-radius: 15px 0 0 15px;
+  }
+
+  .mainNav li:last-child:hover > a {
+    border-radius: 0 15px 15px 0;
   }
 
   .mainNav:after {
