@@ -8,6 +8,7 @@
       <ul class="mainNav">
         <li><NuxtLink to="/about" @click="hideMenu">About</NuxtLink></li>
         <li><NuxtLink to="/projects" @click="hideMenu">Projects</NuxtLink></li>
+        <li><NuxtLink to="/" @click="hideMenu">Blog</NuxtLink></li>
         <li><NuxtLink to="/links" @click="hideMenu">Links</NuxtLink></li>
         <li><NuxtLink to="/datenschutzerklaerung" @click="hideMenu">Datenschutz-Erklärung</NuxtLink></li>
         <li><NuxtLink to="/impressum" @click="hideMenu">Impressum</NuxtLink></li>
@@ -117,7 +118,7 @@ nav.active {
 }
 
 /* Media Queries für größere Bildschirme */
-@media (min-width: 600px) {
+@media (min-width: 670px) {
   .mainNav {
     flex-direction: row;
     justify-content: center;
@@ -140,6 +141,128 @@ nav.active {
     border-radius: 20px 20px 0 0;
     border: 1px solid black;
     border-bottom: 0px;
+    background: #415c7b;
+    display: block;
+    padding: 0;
+    border-radius: 20px 20px 0px 0px;
+  }
+
+  .branding {
+    border-radius: 20px 20px 0px 0px;
+    background: linear-gradient(to bottom, #0c5688 0%,#317bab 27%,#3780af 30%,#61a2ca 36%,#accce1 47%,#b2d0e3 48%,#f7f7f9 53%,#bcbfc9 54%,#40526d 54%,#19304f 55%,#0b2345 56%,#396587 56%,#548cad 57%,#65a4c5 58%,#71b5d6 58%,#7ac0e1 59%,#7fc8e9 60%,#82ceef 60%,#85d1f2 62%,#4e7a9a 76%,#182442 100%);
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .branding .logo {
+    font-weight: bold;
+    font-size: 3rem;
+    margin-top: 3px!important;
+    position: relative;
+    display: inline-block;
+    -webkit-box-reflect: below -17px
+      -webkit-linear-gradient(
+        top,
+        rgba(0,0,0,0) 25%,
+        rgba(255,255,255,1) 100%
+      );
+  }
+
+  .branding .logo::before {
+    content: "mjk @ web";
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    transform: translate(-50%, 1px);
+    z-index: -1;
+    font-weight: bold;
+    font-size: 3rem;
+    line-height: 1;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: 1px;
+    background: linear-gradient(to bottom, #ff2b2b 0%,#fcf400 50%,#00ff00 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+
+  .pageHeader nav {
+    margin-top: 10px;
+    margin-bottom: -10px;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .mainNav {
+    background: linear-gradient(to bottom, rgba(125,185,225,1) 0%,rgba(85,140,170,1) 49%,rgba(65,100,120,1) 50%,rgba(90,145,175,1) 100%);
+    display: inline-block;
+    border: 1px solid #4a728c;
+    border-color: #5a829c #4a728c #3a627c;
+    border-radius: 15px;
+    -webkit-box-shadow: 0 1px 1px #415c7b, 
+      inset 0 2px 4px rgba(255,255,255, 0.3),
+      inset 0 1px 0 rgba(108,170,209, 0.8);
+    -moz-box-shadow: 0 1px 1px #415c7b, 
+      inset 0 2px 4px rgba(255,255,255, 0.3),
+      inset 0 1px 0 rgba(108,170,209, 0.8);
+    box-shadow: 0px 1px 2px #415c7b, 
+      inset 0 2px 4px rgba(255,255,255, 0.3),
+      inset 0 1px 0 rgba(108,170,209, 0.8);
+  }
+
+  .mainNav li {
+    float: left;
+    position: relative;
+    list-style: none;
+  }
+
+  .mainNav li a {
+    font-weight: bolder;
+    font-size: 1.1rem;
+    padding: 8px 20px;
+    text-decoration: none;
+    display: block;
+    /* color: #026; */
+    text-shadow: 0px 1px 0px rgba(108,170,209, 0.55);
+  }
+
+  .mainNav li:hover > a {
+    color: #000;
+    text-shadow: 0px 1px 0px rgba(95,148,183, 0.55);
+    -webkit-box-shadow: 0px 1px 1px 0px rgba(71,110,135, 0.2);
+    -moz-box-shadow: 0px 1px 1px 0px rgba(71,110,135, 0.2);
+    box-shadow: 0px 1px 1px 0px rgba(71,110,135, 0.2);
+    background: #67a2c6;
+    background: -moz-linear-gradient(top, #67a2c6 0%, #4e7996 49%, #4a728c 50%, #5a8dad 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#67a2c6), color-stop(49%,#4e7996), color-stop(50%,#4a728c), color-stop(100%,#5a8dad));
+    background: -webkit-linear-gradient(top, #67a2c6 0%,#4e7996 49%,#4a728c 50%,#5a8dad 100%);
+    background: -o-linear-gradient(top, #67a2c6 0%,#4e7996 49%,#4a728c 50%,#5a8dad 100%);
+    background: -ms-linear-gradient(top, #67a2c6 0%,#4e7996 49%,#4a728c 50%,#5a8dad 100%);
+    background: linear-gradient(to bottom, #67a2c6 0%,#4e7996 49%,#4a728c 50%,#5a8dad 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#67a2c6', endColorstr='#5a8dad',GradientType=0 );
+  }
+
+  .mainNav li:first-child:hover > a {
+    border-radius: 15px 0 0 15px;
+  }
+
+  .mainNav li:last-child:hover > a {
+    border-radius: 0 15px 15px 0;
+  }
+
+  .mainNav:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
   }
 }
 
