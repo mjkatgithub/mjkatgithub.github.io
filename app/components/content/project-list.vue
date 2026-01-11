@@ -20,11 +20,18 @@
   </div>
 </template>
 <script setup>
+// Lade die Ausschlussliste vom Server
+const { 
+  data: excludedRepos = [] 
+} = await useFetch('/api/projects-exclude')
+
 const { error, pending, data} = await useFetch(
   'https://api.github.com/users/mjkatgithub/repos'
 )
 const repos = computed(
-  () => data.value.filter(repo => repo.description)
+  () => data.value
+    .filter(repo => repo.description)
+    .filter(repo => !excludedRepos.value.includes(repo.name))
     .sort((a, b) => b.stargazers_count - a.stargazers_count)
 );
 </script>

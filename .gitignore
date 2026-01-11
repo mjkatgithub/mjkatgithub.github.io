@@ -23,3 +23,6 @@ logs
 .env.*
 !.env.example
 .cursor
+
+# Local project exclude list
+.projects-exclude.json
