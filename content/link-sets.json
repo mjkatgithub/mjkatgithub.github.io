@@ -44,9 +44,9 @@
           "thumbnail": "/assets/icons/facebook48.png"
         },
         {
-          "title": "x.com",
-          "url": "https://x.com/M_Kannengiesser",
-          "thumbnail": "/assets/icons/x.com.png"
+          "title": "Mastodon",
+          "url": "https://mastodon.social/@mjkatweb_aka_bot007",
+          "thumbnail": "/assets/icons/mastodon.png"
         },
         {
           "title": "Reddit",
@@ -116,7 +116,7 @@
         {
           "title": "di.day",
           "url": "https://di.day/",
-          "thumbnail": ""
+          "thumbnail": "/assets/icons/di.day.png"
         }
       ]
     }
