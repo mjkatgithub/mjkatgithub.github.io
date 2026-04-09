@@ -109,14 +109,19 @@
       "title": "Awesome Stuff i found on the internet",
       "links": [
         {
-          "title": "dub-siren.com",
-          "url": "https://dub-siren.com/",
-          "thumbnail": ""
+          "title": "fediverse.info",
+          "url": "https://fediverse.info/",
+          "thumbnail": "/assets/icons/fediverse.info.png"
         },
         {
           "title": "di.day",
           "url": "https://di.day/",
           "thumbnail": "/assets/icons/di.day.png"
+        },
+        {
+          "title": "dub-siren.com",
+          "url": "https://dub-siren.com/",
+          "thumbnail": ""
         }
       ]
     }
